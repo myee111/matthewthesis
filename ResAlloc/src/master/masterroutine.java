@@ -13,13 +13,15 @@ public class masterroutine {
 		Shell shell = new Shell(display);
 		shell.setSize(100,100);
 		shell.open();
-		
+		/**
 		Label label1 = new Label(shell, SWT.BORDER);
 		label1.setText(owner);
 		label1.setSize(100,20);
 		label1.setLocation(10,10);
-	
-		Text text1 = new Text(shell, SWT.H_SCROLL);
+	**/
+		Text text1 = new Text(shell, SWT.BORDER);
+		text1.setText("Hello world");
+		text1.setBounds(10,10,200,20);
 		text1.setTextLimit(30);
 		
 		while(!shell.isDisposed()) {
