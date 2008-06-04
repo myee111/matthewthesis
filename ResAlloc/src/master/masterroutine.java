@@ -4,7 +4,6 @@ import myDisplay.MyDisplay;
 import contract.Contract;
 import file.FileHandler;
 
-
 public class masterroutine {
 	
 	public static void main(String[] args) {
