@@ -3,19 +3,22 @@ package contract;
 import file.FileHandler;
 
 public class Contract {
-	int price;
-	int duration;
-	int ownership;
 	boolean saleStatus;
-	int resources;
+	int ownership;
 	boolean delivery;
 	int contractID;
+	int duration;
 	
+	int price;
+	int resources;
+		
 	public Contract() {
 		saleStatus = false; //ie, the contract has not been sold.
 		ownership = 0;
-		delivery = false; //ie, the resource has not be delivered and the contract has not been discharged.
-		contractID = 0;
+		delivery = false;   //ie, the resource has not be delivered and the contract has not been discharged.
+		contractID = 0;     //This is an initial value.  I need some sort of routine to put a real ID in.
+		duration = 5;       //This is arbitrary.
+		resources = 2;      //This is arbitrary.
 	}
 	
 	public void setContractID() {
