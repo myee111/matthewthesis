@@ -1,16 +1,21 @@
 package file;
 
 import java.io.*;
-
+/**
+ *Prints contract attributes to a line in a file.
+ *@param fileName A filename. 
+ *@param inputData The contract data.
+ *@author Matthew Yee
+ */
 public class FileHandler {
 	FileOutputStream out;
 	PrintStream p;
 	
-	public void writeFile() {
+	public void writeFile(String fileName,String inputData) {
 		try {
-			out = new FileOutputStream("c:\\matthewdata.txt");
+			out = new FileOutputStream(fileName);
 			p = new PrintStream(out);
-			p.println("Test");
+			p.println(inputData);
 			p.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

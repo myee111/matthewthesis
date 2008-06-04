@@ -1,5 +1,9 @@
 package contract;
 
+import javax.print.DocFlavor.STRING;
+
+import file.FileHandler;
+
 public class Contract {
 	int price;
 	int duration;
@@ -80,7 +84,10 @@ public class Contract {
 		return delivery;
 	}
 	
-	public void RecordContract() {
+	public void RecordContract(String fileName) {
+		String inputData = null;
+		FileHandler F1 = new FileHandler();
+		F1.writeFile(fileName, inputData);
 		return;
 	}
 }
