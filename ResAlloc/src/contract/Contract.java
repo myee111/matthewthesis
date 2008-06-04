@@ -37,8 +37,9 @@ public class Contract {
 		return;
 	}
 	
-	public void setSalesStatus() {
+	public void setSalesStatus(boolean status) {
 		//Flag whether the contract is for sale.
+		if (saleStatus!=status) saleStatus = status;
 		return;
 	}
 	
@@ -77,5 +78,9 @@ public class Contract {
 	
 	public boolean getDelivery() {
 		return delivery;
+	}
+	
+	public void RecordContract() {
+		return;
 	}
 }
