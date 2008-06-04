@@ -2,10 +2,11 @@ package actor;
 
 import contract.Contract;
 
-public class Producer {
+public class Producer extends Seller {
 	Contract productContract = new Contract();
 	int newprice;
 	int duration;
+	Seller mySeller;
 	
 	public void produceResource() {
 		setPrice();
