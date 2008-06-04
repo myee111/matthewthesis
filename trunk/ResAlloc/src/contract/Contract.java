@@ -4,18 +4,18 @@ import file.FileHandler;
 
 public class Contract {
 	boolean saleStatus;
+	//Ownership is the unique ID of the owner of the contract.
 	int ownership;
 	boolean delivery;
 	int contractID;
 	int duration;
 	int resources;
-	
 	int price;           
-//Eventually a pricing algorithm will take care of this from
-//perspective of the producer.  The sellers may or may not use
-//some other method.  For now, initialise as 666
-	
-		
+/**
+ * Eventually a pricing algorithm will take care of this from
+ *perspective of the producer.  The sellers may or may not use
+ *some other method.  For now, initialise as 666
+ */	
 	public Contract() {
 		saleStatus = false; //ie, the contract has not been sold.
 		ownership = 0;
@@ -25,7 +25,6 @@ public class Contract {
 		resources = 2;      //This is arbitrary.
 		price = 666;
 	}
-	
 	public void setContractID() {
 		//Set the contract ID.
 		return;
@@ -35,61 +34,48 @@ public class Contract {
 		price = newprice;
 		return;
 	}
-	
 	public void setDuration(int newduration) {
 		//Set the duration of the contract before resource must be delivered.
 		duration = newduration;
 		return;
 	}
-	
 	public void setOwnership() {
 		//Set the owner.
 		return;
 	}
-	
 	public void setSalesStatus(boolean status) {
 		//Flag whether the contract is for sale.
 		if (saleStatus!=status) saleStatus = status;
 		return;
 	}
-	
 	public void setResources() {
 		//Adjust the amount of resources associated with this contract.
 	}
-	
 	public void setDelivery() {
 		//Flag whether the resource has been delivered, and thus the contract is discharged.
 		return;
 	}
-	
 	public int getContractID() {
 		return contractID;
 	}
-	
 	public int getPrice() {
 		return price;
 	}
-	
 	public int getDuration() {
 		return duration;
 	}
-	
 	public int getOwnership() {
 		return ownership;
 	}
-	
 	public boolean getsalesStatus() {
 		return saleStatus;
 	}
-	
 	public int getResources() {
 		return resources;
 	}
-	
 	public boolean getDelivery() {
 		return delivery;
 	}
-	
 	/**
 	 * Writes the contract attributes somewhere...
 	 * @param fileName Name of the data target.
