@@ -8,9 +8,13 @@ public class Contract {
 	boolean delivery;
 	int contractID;
 	int duration;
-	
-	int price;
 	int resources;
+	
+	int price;           
+//Eventually a pricing algorithm will take care of this from
+//perspective of the producer.  The sellers may or may not use
+//some other method.  For now, initialise as 666
+	
 		
 	public Contract() {
 		saleStatus = false; //ie, the contract has not been sold.
@@ -19,6 +23,7 @@ public class Contract {
 		contractID = 0;     //This is an initial value.  I need some sort of routine to put a real ID in.
 		duration = 5;       //This is arbitrary.
 		resources = 2;      //This is arbitrary.
+		price = 666;
 	}
 	
 	public void setContractID() {
