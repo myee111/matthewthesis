@@ -1,7 +1,7 @@
 package master;
 
 import myDisplay.MyDisplay;
-import contractObject.Contract;      
+import contract.Contract;
 
 public class masterroutine {
 	
