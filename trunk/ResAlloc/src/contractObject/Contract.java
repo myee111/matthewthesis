@@ -7,13 +7,19 @@ public class Contract {
 	boolean saleStatus;
 	int resources;
 	boolean delivery;
+	int contractID;
 	
 	public Contract() {
 		saleStatus = false;
 		ownership = 0;
 		delivery = false;
+		contractID = 0;
 	}
 	
+	public void setContractID() {
+		//Set the contract ID.
+		return;
+	}
 	public void setPrice() {
 		//Set the price for the contract.
 		return;
@@ -41,6 +47,10 @@ public class Contract {
 	public void setDelivery() {
 		//Flag whether the resource has been delivered, and thus the contract is discharged.
 		return;
+	}
+	
+	public int getContractID() {
+		return contractID;
 	}
 	
 	public int getPrice() {
