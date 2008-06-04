@@ -1,7 +1,5 @@
 package contract;
 
-import javax.print.DocFlavor.STRING;
-
 import file.FileHandler;
 
 public class Contract {
@@ -14,9 +12,9 @@ public class Contract {
 	int contractID;
 	
 	public Contract() {
-		saleStatus = false;
+		saleStatus = false; //ie, the contract has not been sold.
 		ownership = 0;
-		delivery = false;
+		delivery = false; //ie, the resource has not be delivered and the contract has not been discharged.
 		contractID = 0;
 	}
 	
@@ -84,10 +82,22 @@ public class Contract {
 		return delivery;
 	}
 	
+	/**
+	 * Writes the contract attributes somewhere...
+	 * @param fileName Name of the data target.
+	 * @author Matthew Yee
+	 */
 	public void RecordContract(String fileName) {
-		String inputData = null;
+		//In particular, this method writes to a file.
 		FileHandler F1 = new FileHandler();
-		F1.writeFile(fileName, inputData);
+		F1.writeFile(fileName, 
+				Integer.toString(contractID)+" " 
+				+ Integer.toString(ownership)+" " 
+				+ String.valueOf(delivery)+" "
+				+ Integer.toString(resources)+" "
+				+ String.valueOf(saleStatus)+" "
+				+ Integer.toString(duration)+" "
+				+ Integer.toString(price));
 		return;
 	}
 }
