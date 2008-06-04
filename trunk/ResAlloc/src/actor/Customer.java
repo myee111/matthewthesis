@@ -1,8 +1,10 @@
 package actor;
 
 public class Customer {
-	boolean transactionRole;
-	int customerNumber;
+	int customerNumber;	
 	
+	public int getCustomerNumber() {
+		return customerNumber;
+	}
 
 }
