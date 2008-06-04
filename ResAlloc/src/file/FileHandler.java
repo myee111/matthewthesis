@@ -6,21 +6,21 @@ public class FileHandler {
 	FileOutputStream out;
 	PrintStream p;
 	
-	public void openFile() {
+	public void writeFile() {
 		try {
-			out = new FileOutputStream("data.txt");
+			out = new FileOutputStream("c:\\matthewdata.txt");
+			p = new PrintStream(out);
+			p.println("Test");
+			p.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Error writing to file.");
 		}
 		return;
 	}
 	
 	public void closeFile() {
-		return;
-	}
-	
-	public void writeFile() {
 		return;
 	}
 
