@@ -9,14 +9,14 @@ public class masterroutine {
 	public static void main(String[] args) {
 		
 		Contract C1 = new Contract();
-		MyDisplay D1 = new MyDisplay();
-		FileHandler F1 = new FileHandler();
+//		MyDisplay D1 = new MyDisplay();
+//		FileHandler F1 = new FileHandler();
 		
-		String owner = Integer.toString(C1.getOwnership());		
-		System.out.println(owner);
+//		String owner = Integer.toString(C1.getOwnership());		
+//		System.out.println(owner);
 		
-		D1.myDisplay();
-		F1.writeFile("c:\\test-textfile.txt", "hello world");
+//		D1.myDisplay();
+		C1.RecordContract("c:\\myData.txt");
 	}
 
 }
