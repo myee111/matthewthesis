@@ -20,13 +20,15 @@ public class Contract {
 		//Set the contract ID.
 		return;
 	}
-	public void setPrice() {
+	public void setPrice(int newprice) {
 		//Set the price for the contract.
+		price = newprice;
 		return;
 	}
 	
-	public void setDuration() {
+	public void setDuration(int newduration) {
 		//Set the duration of the contract before resource must be delivered.
+		duration = newduration;
 		return;
 	}
 	
