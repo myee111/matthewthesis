@@ -5,7 +5,7 @@ import org.eclipse.swt.widgets.*;
 
 public class MyDisplay {
 		
-	public MyDisplay() {
+	public void myDisplay() {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setSize(100,100);
