@@ -19,7 +19,7 @@ public class ContractID {
 		return timeHash;
 	}
 	//Second, calculate the MD5 hash of the date.
-    public String createID() throws Exception{
+    public String createID() throws Exception {
     	int mytimeHash = ContractIDHash();
     	String mytimeHashString = Integer.toString(mytimeHash);
        	MessageDigest m=MessageDigest.getInstance("MD5");
