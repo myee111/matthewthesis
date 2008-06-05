@@ -2,14 +2,14 @@ package contract;
 import file.FileHandler;
 
 public class Contract {
-	boolean saleStatus;
+	private boolean saleStatus;
 	//Ownership is the unique ID of the owner of the contract.
-	int ownership;
-	boolean delivery;
-	String contractID;
-	int duration;
-	int resources;
-	int price;
+	private int ownership;
+	private boolean delivery;
+	private String contractID;
+	private int duration;
+	private int resources;
+	private int price;
 /**
  * Eventually a pricing algorithm will take care of this from
  *perspective of the producer.  The sellers may or may not use

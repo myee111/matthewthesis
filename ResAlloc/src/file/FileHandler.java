@@ -8,8 +8,8 @@ import java.io.*;
  *@author Matthew Yee
  */
 public class FileHandler {
-	FileOutputStream out;
-	PrintStream p;
+	private FileOutputStream out;
+	private PrintStream p;
 	
 	public void writeFile(String fileName,String[] inputData) {
 		try {
@@ -23,7 +23,6 @@ public class FileHandler {
 		}
 		return;
 	}
-	
 	public void closeFile() {
 		return;
 	}

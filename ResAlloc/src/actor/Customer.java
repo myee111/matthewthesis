@@ -1,10 +1,15 @@
 package actor;
 
 public class Customer {
-	int customerNumber;	
+	private int customerNumber;	
 	
 	public int getCustomerNumber() {
 		return customerNumber;
 	}
+	public void setCustomerNumber(int customerID) {
+		customerNumber = customerID;
+		return;
+	}
+	
 
 }
