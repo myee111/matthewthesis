@@ -1,33 +1,21 @@
 package actor;
-
 import contract.Contract;
 
-public class Producer extends Seller {
-	Contract productContract = new Contract();
-	int newprice;
-	int duration;
+public class Producer extends Customer {
+	private Contract productContract = new Contract();	//Already declared in Seller class.
 	
-	public void produceResource() {
-		setPrice();
-		setDuration();
-		//Then write the contract.
+	public void produceResource(int price, int time) throws Exception {
+		productContract.setPrice(price);
+		productContract.setDuration(time);
+		productContract.setContractID();
 		return;
 	}
-	
-	public void setPrice() {
-		productContract.setPrice(newprice);
+	public void commitResource(String filenamestring) {
+		productContract.RecordContractFile(filenamestring);
 		return;
 	}
-	
-	public void setDuration() {
-		productContract.setDuration(duration);
-		return;
-	}
-	
-	public void setForSale() {
+	public void setSellContract() { 				//Ask Mike or Nir about this duplication from Seller class.
 		productContract.setSalesStatus(true);
 		return;
-		
 	}
-
 }
