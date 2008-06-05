@@ -40,8 +40,9 @@ public class Contract {
 		duration = newduration;
 		return;
 	}
-	public void setOwnership() {
+	public void setOwnership(int ownerID) {
 		//Set the owner.
+		ownership = ownerID;
 		return;
 	}
 	public void setSalesStatus(boolean status) {
@@ -49,11 +50,14 @@ public class Contract {
 		if (saleStatus!=status) saleStatus = status;
 		return;
 	}
-	public void setResources() {
+	public void setResources(int amount) {
 		//Adjust the amount of resources associated with this contract.
+		resources = amount;
+		return;
 	}
-	public void setDelivery() {
+	public void setDelivery(boolean delivered) {
 		//Flag whether the resource has been delivered, and thus the contract is discharged.
+		delivery = delivered;
 		return;
 	}
 	public String getContractID() {
