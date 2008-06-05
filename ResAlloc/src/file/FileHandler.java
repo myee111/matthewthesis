@@ -18,7 +18,6 @@ public class FileHandler {
 			for (int i=0; i<inputData.length; i++) p.print(inputData[i]+" ");
 			p.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.err.println("Error writing to file.");
 		}

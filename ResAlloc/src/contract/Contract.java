@@ -1,7 +1,5 @@
 package contract;
 import file.FileHandler;
-import java.lang.Object;
-import java.util.ArrayList;
 
 public class Contract {
 	boolean saleStatus;
@@ -97,5 +95,9 @@ public class Contract {
 		contractRecord[6] = Integer.toString(price);
 		F1.writeFile(fileName, contractRecord);
 		return;
+	}
+	public Object[] ReadContract(String contractID) {
+		Object[] contractFromDB = new Object[7];
+		return contractFromDB;
 	}
 }
