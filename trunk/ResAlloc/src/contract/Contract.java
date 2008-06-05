@@ -1,5 +1,4 @@
 package contract;
-
 import file.FileHandler;
 
 public class Contract {
@@ -7,7 +6,7 @@ public class Contract {
 	//Ownership is the unique ID of the owner of the contract.
 	int ownership;
 	boolean delivery;
-	int contractID;
+	String contractID;
 	int duration;
 	int resources;
 	int price;           
@@ -20,14 +19,16 @@ public class Contract {
 		saleStatus = false; //ie, the contract has not been sold.
 		ownership = 0;
 		delivery = false;   //ie, the resource has not be delivered and the contract has not been discharged.
-		contractID = 0;     //This is an initial value.  I need some sort of routine to put a real ID in.
+		contractID = null;  //This is an initial value.  I need some sort of routine to put a real ID in.
 		duration = 5;       //This is arbitrary.
 		resources = 2;      //This is arbitrary.
 		price = 666;
 	}
-	public void setContractID() {
+	public String setContractID() throws Exception {
 		//Set the contract ID.
-		return;
+		ContractID myID = new ContractID();
+		contractID = (String) myID.createID();
+		return contractID;
 	}
 	public void setPrice(int newprice) {
 		//Set the price for the contract.
@@ -55,7 +56,7 @@ public class Contract {
 		//Flag whether the resource has been delivered, and thus the contract is discharged.
 		return;
 	}
-	public int getContractID() {
+	public String getContractID() {
 		return contractID;
 	}
 	public int getPrice() {
@@ -81,11 +82,11 @@ public class Contract {
 	 * @param fileName Name of the data target.
 	 * @author Matthew Yee
 	 */
-	public void RecordContract(String fileName) {
+	public void RecordContractFile(String fileName) {
 		//In particular, this method writes to a file.
 		FileHandler F1 = new FileHandler();
 		F1.writeFile(fileName, 
-				Integer.toString(contractID)+" " 
+				contractID+" " 
 				+ Integer.toString(ownership)+" " 
 				+ String.valueOf(delivery)+" "
 				+ Integer.toString(resources)+" "

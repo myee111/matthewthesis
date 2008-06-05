@@ -4,10 +4,11 @@ import contract.Contract;
 
 public class masterroutine {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		Contract C1 = new Contract();
-		C1.RecordContract("c:\\myData.txt");
+		C1.setContractID();
+		C1.RecordContractFile("c:\\myData.txt");
 		
 //		MyDisplay D1 = new MyDisplay();		
 //		D1.myDisplay();
