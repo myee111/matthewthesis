@@ -15,8 +15,7 @@ public class ContractID {
 	//First, get the date.
 	public int ContractIDHash() {
 		Calendar myDate = Calendar.getInstance();
-		int timeHash = myDate.hashCode();
-		return timeHash;
+		return myDate.hashCode();
 	}
 	//Second, calculate the MD5 hash of the date.
     public String createID() throws Exception {
