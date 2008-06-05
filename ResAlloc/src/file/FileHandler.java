@@ -11,11 +11,11 @@ public class FileHandler {
 	FileOutputStream out;
 	PrintStream p;
 	
-	public void writeFile(String fileName,String inputData) {
+	public void writeFile(String fileName,String[] inputData) {
 		try {
 			out = new FileOutputStream(fileName);
 			p = new PrintStream(out);
-			p.println(inputData);
+			for (int i=0; i<inputData.length; i++) p.print(inputData[i]+" ");
 			p.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

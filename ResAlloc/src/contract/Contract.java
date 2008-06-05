@@ -1,5 +1,7 @@
 package contract;
 import file.FileHandler;
+import java.lang.Object;
+import java.util.ArrayList;
 
 public class Contract {
 	boolean saleStatus;
@@ -9,7 +11,7 @@ public class Contract {
 	String contractID;
 	int duration;
 	int resources;
-	int price;           
+	int price;
 /**
  * Eventually a pricing algorithm will take care of this from
  *perspective of the producer.  The sellers may or may not use
@@ -85,14 +87,15 @@ public class Contract {
 	public void RecordContractFile(String fileName) {
 		//In particular, this method writes to a file.
 		FileHandler F1 = new FileHandler();
-		F1.writeFile(fileName, 
-				contractID+" " 
-				+ Integer.toString(ownership)+" " 
-				+ String.valueOf(delivery)+" "
-				+ Integer.toString(resources)+" "
-				+ String.valueOf(saleStatus)+" "
-				+ Integer.toString(duration)+" "
-				+ Integer.toString(price));
+		String[] contractRecord = new String[7];
+		contractRecord[0] = contractID; 
+		contractRecord[1] = Integer.toString(ownership); 
+		contractRecord[2] = String.valueOf(delivery);
+		contractRecord[3] = Integer.toString(resources);
+		contractRecord[4] = String.valueOf(saleStatus);
+		contractRecord[5] = Integer.toString(duration);
+		contractRecord[6] = Integer.toString(price);
+		F1.writeFile(fileName, contractRecord);
 		return;
 	}
 }
