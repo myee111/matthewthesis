@@ -13,13 +13,12 @@ public class Main {
 		boolean delivery	= false;			//status of delivery of resource
 		int resources		= 1000;				//amount of resources to be assigned to contract
 		String filename = "c:\\new-data.txt";		//filename of the data file
-//		Connection con = null;
-		
+				
 		DBHandler D1 = new DBHandler();
 		Producer Matthew = new Producer();
 		
-//		con = (Connection) D1.opendbConnection(); //why do i have a cast here?
 		D1.opendbConnection();
+		D1.commitAttributeContracttbl();
 		D1.closedbConnection();
 		
 		Matthew.setCustomerNumber(producerID);
@@ -27,5 +26,4 @@ public class Main {
 		Matthew.setSellContract();
 		Matthew.commitResource(filename);
 	}
-
 }
