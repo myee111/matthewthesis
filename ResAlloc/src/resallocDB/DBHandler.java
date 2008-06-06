@@ -1,23 +1,23 @@
 package resallocDB;
 
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
-
+import java.sql.*;
 import com.mysql.jdbc.Connection;
 
 public class DBHandler {
+	/**
+	 * Code stolen from http://www.herongyang.com/jdbc/MySQL-JDBC-Driver-Server-Information.html
+	 */
+	String host					= "localhost";
+	String user					= "root";
+	String pw					= "not0racle";
+	String db					= "Test";
 	Connection con = null;
-	public void opendbConnection(Connection con) {
-		/**
-		 * Code stolen from http://www.herongyang.com/jdbc/MySQL-JDBC-Driver-Server-Information.html
-		 */
-		String host					= "localhost";
-		String user					= "root";
-		String pw					= "not0racle";
-		String db					= "Test";
+	com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+	
+	public void opendbConnection() {
 		
-		try {
-			com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+		
+		try {		
 			ds.setServerName(host);
 			ds.setPortNumber(3306);
 			ds.setDatabaseName(db);
@@ -35,8 +35,24 @@ public class DBHandler {
 		}
 		return;
 	}
-	public void closedbConnection(Connection con) throws SQLException {
+	public void closedbConnection() throws SQLException {
 		con.close();
+		return;
+	}
+	public void setHost(String hostname) {
+		host = hostname;
+		return;
+	}
+	public void setUser(String username) {
+		user = username;
+		return;
+	}
+	public void setPw(String password) {
+		pw = password;
+		return;
+	}
+	public void setDb(String database) {
+		db = database;
 		return;
 	}
 }
