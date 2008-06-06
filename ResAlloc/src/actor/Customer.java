@@ -10,6 +10,4 @@ public class Customer {
 		customerNumber = customerID;
 		return;
 	}
-	
-
 }

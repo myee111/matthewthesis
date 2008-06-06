@@ -17,7 +17,7 @@ public class Producer extends Customer {
 		productContract.RecordContractFile(filenamestring);
 		return;
 	}
-	public void setSellContract() { 				//Ask Mike or Nir about this duplication from Seller class.
+	public void setSellContract() { 	//Ask Mike or Nir about this duplication from Seller class.
 		productContract.setSalesStatus(true);
 		return;
 	}
