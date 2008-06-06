@@ -13,7 +13,7 @@ public class masterroutine {
 		int time			= 12;				//duration of the contract
 		boolean delivery	= false;			//status of delivery of resource
 		int resources		= 1000;				//amount of resources to be assigned to contract
-		String filename = "new-data.txt";		//filename of the data file
+		String filename = "c:\\new-data.txt";		//filename of the data file
 		
 		Producer Matthew = new Producer();
 		Matthew.setCustomerNumber(producerID);
