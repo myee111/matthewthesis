@@ -2,11 +2,10 @@ package contract;
 import file.FileHandler;
 
 public class Contract {
-	private boolean saleStatus;
-	//Ownership is the unique ID of the owner of the contract.
-	private int ownership;
-	private boolean delivery;
 	private String contractID;
+	private boolean saleStatus;
+	private int ownership;  		//Ownership is the unique ID of the owner of the contract.
+	private boolean delivery;
 	private int duration;
 	private int resources;
 	private int price;
@@ -24,39 +23,32 @@ public class Contract {
 		resources = 2;      //This is arbitrary.
 		price = 666;
 	}
-	public String setContractID() throws Exception {
-		//Set the contract ID.
-		ContractID myID = new ContractID();
+	public String setContractID() throws Exception {	//Set the contract ID.
+		ContractID myID = new ContractID();	
 		contractID = (String) myID.createID();
 		return contractID;
 	}
-	public void setPrice(int newprice) {
-		//Set the price for the contract.
+	public void setPrice(int newprice) {	//Set the price for the contract.
 		price = newprice;
 		return;
 	}
-	public void setDuration(int newduration) {
-		//Set the duration of the contract before resource must be delivered.
+	public void setDuration(int newduration) {	//Set the duration of the contract before resource must be delivered.
 		duration = newduration;
 		return;
 	}
-	public void setOwnership(int ownerID) {
-		//Set the owner.
+	public void setOwnership(int ownerID) {	//Set the owner.
 		ownership = ownerID;
 		return;
 	}
-	public void setSalesStatus(boolean status) {
-		//Flag whether the contract is for sale.
+	public void setSalesStatus(boolean status) {	//Flag whether the contract is for sale.
 		if (saleStatus!=status) saleStatus = status;
 		return;
 	}
-	public void setResources(int amount) {
-		//Adjust the amount of resources associated with this contract.
+	public void setResources(int amount) {	//Adjust the amount of resources associated with this contract.
 		resources = amount;
 		return;
 	}
-	public void setDelivery(boolean delivered) {
-		//Flag whether the resource has been delivered, and thus the contract is discharged.
+	public void setDelivery(boolean delivered) {	//Flag whether the resource has been delivered, and thus the contract is discharged.
 		delivery = delivered;
 		return;
 	}
@@ -86,8 +78,7 @@ public class Contract {
 	 * @param fileName Name of the data target.
 	 * @author Matthew Yee
 	 */
-	public void RecordContractFile(String fileName) {
-		//In particular, this method writes to a file.
+	public void RecordContractFile(String fileName) {	//In particular, this method writes to a file.
 		FileHandler F1 = new FileHandler();
 		String[] contractRecord = new String[7];
 		contractRecord[0] = contractID; 
