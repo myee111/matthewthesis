@@ -15,7 +15,10 @@ public class FileHandler {
 		try {
 			out = new FileOutputStream(fileName);
 			p = new PrintStream(out);
-			for (int i=0; i<inputData.length; i++) p.print(inputData[i]+" ");
+			for (int i=0; i<inputData.length; i++) {
+				p.print(inputData[i]+" ");
+				System.out.print(inputData[i]+" ");
+			}
 			p.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

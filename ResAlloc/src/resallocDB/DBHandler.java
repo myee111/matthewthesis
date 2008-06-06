@@ -8,6 +8,9 @@ import com.mysql.jdbc.Connection;
 public class DBHandler {
 	Connection con = null;
 	public void opendbConnection(Connection con) {
+		/**
+		 * Code stolen from http://www.herongyang.com/jdbc/MySQL-JDBC-Driver-Server-Information.html
+		 */
 		String host					= "localhost";
 		String user					= "root";
 		String pw					= "not0racle";
