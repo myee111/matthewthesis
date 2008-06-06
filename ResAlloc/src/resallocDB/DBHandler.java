@@ -1,6 +1,7 @@
 package resallocDB;
 
 import java.sql.*;
+
 import com.mysql.jdbc.Connection;
 
 public class DBHandler {
@@ -10,13 +11,11 @@ public class DBHandler {
 	String host					= "localhost";
 	String user					= "root";
 	String pw					= "not0racle";
-	String db					= "Test";
+	String db					= "resallocdb";
 	Connection con = null;
 	com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
 	
 	public void opendbConnection() {
-		
-		
 		try {		
 			ds.setServerName(host);
 			ds.setPortNumber(3306);
@@ -30,6 +29,7 @@ public class DBHandler {
 			System.out.println("Server name: "+ meta.getDatabaseProductName());
 			System.out.println("Server version: "+ meta.getDatabaseProductVersion());
 			System.out.println("Driver version: "+ meta.getDriverVersion());
+			System.out.println("Table types: "+ meta.getTableTypes());
 		} catch (Exception e) {
 			System.err.println("Exception: "+e.getMessage());
 		}
@@ -53,6 +53,27 @@ public class DBHandler {
 	}
 	public void setDb(String database) {
 		db = database;
+		return;
+	}
+	public String getUser() {
+		return user;
+	}
+	public String getHost() {
+		return host;
+	}
+	public String getPw() {
+		return pw;
+	}
+	public String getDb() {
+		return db;
+	}
+	public void commitAttributeContracttbl() throws SQLException {
+		Statement s = con.createStatement();
+		int count = 0;
+		count = s.executeUpdate("INSERT INTO contractTbl (contractID)"
+				+ " VALUES"
+				+ "('helloworld')");
+		System.out.println(count+" rows were inserted");
 		return;
 	}
 }
