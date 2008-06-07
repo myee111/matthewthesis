@@ -67,12 +67,21 @@ public class DBHandler {
 	public String getDb() {
 		return db;
 	}
-	public void commitAttributeContracttbl() throws SQLException {
+	public void commitContractIDtoContracttbl(String ID) throws SQLException {
 		Statement s = con.createStatement();
 		int count = 0;
 		count = s.executeUpdate("INSERT INTO contractTbl (contractID)"
 				+ " VALUES"
-				+ "('helloworld')");
+				+ "('" +ID+"')");
+		System.out.println(count+" rows were inserted");
+		return;
+	}
+	public void commitSaleStatustoContracttbl(boolean status) throws SQLException {
+		Statement s = con.createStatement();
+		int count = 0;
+		count = s.executeUpdate("INSERT INTO contractTbl (salestatus)"
+				+ " VALUES"
+				+ "('" +status+"')");
 		System.out.println(count+" rows were inserted");
 		return;
 	}

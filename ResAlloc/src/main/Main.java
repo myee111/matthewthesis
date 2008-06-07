@@ -18,7 +18,7 @@ public class Main {
 		Producer Matthew = new Producer();
 		
 		D1.opendbConnection();
-		D1.commitAttributeContracttbl();
+		D1.commitContractIDtoContracttbl("whatevs");
 		D1.closedbConnection();
 		
 		Matthew.setCustomerNumber(producerID);
