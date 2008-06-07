@@ -105,19 +105,33 @@ public class Contract {
 		return;
 	}
 	public void RecordContractDB() {
-		String[] contractRecord = new String[8];
+		Object[] contractRecord = new Object[8];
 		contractRecord[0] = contractID; 
-		contractRecord[1] = Integer.toString(ownership); 
-		contractRecord[2] = String.valueOf(delivery);
-		contractRecord[3] = Integer.toString(resources);
-		contractRecord[4] = String.valueOf(saleStatus);
-		contractRecord[5] = Integer.toString(duration);
-		contractRecord[6] = Integer.toString(price);
-		contractRecord[7] = Long.toString(commencedate);
+		contractRecord[1] = ownership; 
+		contractRecord[2] = delivery;
+		contractRecord[3] = resources;
+		contractRecord[4] = saleStatus;
+		contractRecord[5] = duration;
+		contractRecord[6] = price;
+		contractRecord[7] = commencedate;
 		return;
 	}
 	public Object[] ReadContract(String contractID) {
 		Object[] contractFromDB = new Object[7];
 		return contractFromDB;
 	}
+	
+	
+//	public void RecordContractDB() {
+//		Object[] contractRecord = new Object[8];
+//		contractRecord[0] = contractID; 
+//		contractRecord[1] = Integer.toString(ownership); 
+//		contractRecord[2] = String.valueOf(delivery);
+//		contractRecord[3] = Integer.toString(resources);
+//		contractRecord[4] = String.valueOf(saleStatus);
+//		contractRecord[5] = Integer.toString(duration);
+//		contractRecord[6] = Integer.toString(price);
+//		contractRecord[7] = Long.toString(commencedate);
+//		return;
+//	}
 }

@@ -12,9 +12,21 @@ public class DBHandler {
 	String user					= "root";
 	String pw					= "not0racle";
 	String db					= "resallocdb";
+	
 	Connection con = null;
 	com.mysql.jdbc.jdbc2.optional.MysqlDataSource ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
-	
+	//SQL Statements
+	String rowstatementcontracttbl = "INSERT INTO contractTbl("
+		+ "contractID,"
+		+ "saleStatus,"
+		+ "ownership,"
+		+ "delivery,"
+		+ "duration,"
+		+ "resources,"
+		+ "price,"
+		+ "commencedate)"
+		+ "VALUES(?,?,?,?,?,?,?,?)";
+	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=?";
 	public void opendbConnection() {
 		try {		
 			ds.setServerName(host);
@@ -29,7 +41,6 @@ public class DBHandler {
 			System.out.println("Server name: "+ meta.getDatabaseProductName());
 			System.out.println("Server version: "+ meta.getDatabaseProductVersion());
 			System.out.println("Driver version: "+ meta.getDriverVersion());
-			System.out.println("Table types: "+ meta.getTableTypes());
 		} catch (Exception e) {
 			System.err.println("Exception: "+e.getMessage());
 		}
@@ -67,22 +78,33 @@ public class DBHandler {
 	public String getDb() {
 		return db;
 	}
-	public void commitContractIDtoContracttbl(String ID) throws SQLException {
-		Statement s = con.createStatement();
-		int count = 0;
-		count = s.executeUpdate("INSERT INTO contractTbl (contractID)"
-				+ " VALUES"
-				+ "('" +ID+"')");
-		System.out.println(count+" rows were inserted");
+	public void committoContracttbl(String contractID,
+									boolean saleStatus,
+									int ownership,
+									boolean delivery,
+									int duration,
+									int resources,
+									int price,
+									long commencedate){
+		try {
+			PreparedStatement ps = con.prepareStatement(rowstatementcontracttbl);
+			ps.setString(1,contractID);
+			ps.setBoolean(2, saleStatus);
+			ps.setInt(3, ownership);
+			ps.setBoolean(4, delivery);
+			ps.setInt(5, duration);
+			ps.setInt(6, resources);
+			ps.setInt(7, price);
+			ps.setLong(8, commencedate);
+			ps.executeUpdate();
+		} catch (SQLException e) {	
+		}
 		return;
 	}
-	public void commitSaleStatustoContracttbl(boolean status) throws SQLException {
-		Statement s = con.createStatement();
-		int count = 0;
-		count = s.executeUpdate("INSERT INTO contractTbl (salestatus)"
-				+ " VALUES"
-				+ "('" +status+"')");
-		System.out.println(count+" rows were inserted");
+	public void deleteRowinContracttbl(String contractID) throws SQLException{
+		PreparedStatement ps = con.prepareStatement(drcontracttbl);
+		ps.setString(1,contractID);
+		ps.executeUpdate();
 		return;
 	}
 }

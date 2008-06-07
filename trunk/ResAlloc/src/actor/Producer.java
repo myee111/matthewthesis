@@ -1,4 +1,7 @@
 package actor;
+import java.sql.SQLException;
+
+import resallocDB.DBHandler;
 import contract.Contract;
 
 public class Producer extends Customer {
@@ -13,11 +16,25 @@ public class Producer extends Customer {
 		productContract.setResources(resources);
 		return;
 	}
-	public void commitResource(String filenamestring) {
-		productContract.RecordContractFile(filenamestring);
+//	public void commitResource(String filenamestring) {
+//		productContract.RecordContractFile(filenamestring);
+//		return;
+//	}
+	public void commitResource() throws SQLException {
+		DBHandler D1 = new DBHandler();
+		D1.opendbConnection();
+		D1.committoContracttbl(productContract.getContractID(),
+							   productContract.getsalesStatus(),
+							   productContract.getOwnership(),
+							   productContract.getDelivery(),
+							   productContract.getDuration(),
+							   productContract.getResources(),
+							   productContract.getPrice(),
+							   productContract.getCommencedate());
+		D1.closedbConnection();
 		return;
 	}
-	public void setSellContract() { 	//Ask Mike or Nir about this duplication from Seller class.
+	public void setSellContract() {
 		productContract.setSalesStatus(true);
 		return;
 	}
