@@ -104,6 +104,18 @@ public class Contract {
 		F1.writeFile(fileName, contractRecord);
 		return;
 	}
+	public void RecordContractDB() {
+		String[] contractRecord = new String[8];
+		contractRecord[0] = contractID; 
+		contractRecord[1] = Integer.toString(ownership); 
+		contractRecord[2] = String.valueOf(delivery);
+		contractRecord[3] = Integer.toString(resources);
+		contractRecord[4] = String.valueOf(saleStatus);
+		contractRecord[5] = Integer.toString(duration);
+		contractRecord[6] = Integer.toString(price);
+		contractRecord[7] = Long.toString(commencedate);
+		return;
+	}
 	public Object[] ReadContract(String contractID) {
 		Object[] contractFromDB = new Object[7];
 		return contractFromDB;
