@@ -11,11 +11,11 @@ public class Main {
 		boolean delivery	= false;			//status of delivery of resource
 		int resources		= 1000;				//amount of resources to be assigned to contract
 				
-		Producer Matthew = new Producer();
+		Producer Matthew = new Producer(producerID);
+		Producer George = new Producer(54321);
 		
-		Matthew.setCustomerNumber(producerID);
-		Matthew.produceResource(price,time,delivery,resources);
-		Matthew.setSellContract();
-		Matthew.commitResource();
+		Matthew.produceContract(price,time,delivery,resources);
+		George.produceContract(13123,99,false,8888);
+		George.displayContract("4426415922b47017e67d3889a0e48939");
 	}
 }

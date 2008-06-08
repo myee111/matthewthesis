@@ -1,5 +1,6 @@
 package contract;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import file.FileHandler;
 
@@ -104,34 +105,17 @@ public class Contract {
 		F1.writeFile(fileName, contractRecord);
 		return;
 	}
-	public void RecordContractDB() {
-		Object[] contractRecord = new Object[8];
-		contractRecord[0] = contractID; 
-		contractRecord[1] = ownership; 
-		contractRecord[2] = delivery;
-		contractRecord[3] = resources;
-		contractRecord[4] = saleStatus;
-		contractRecord[5] = duration;
-		contractRecord[6] = price;
-		contractRecord[7] = commencedate;
+	public void RecordContractDB() throws SQLException {	
+		ContractDB c1 = new ContractDB();
+		c1.commitRecord(contractID, saleStatus, ownership, delivery, duration, resources, price, commencedate);
 		return;
 	}
-	public Object[] ReadContract(String contractID) {
-		Object[] contractFromDB = new Object[7];
-		return contractFromDB;
+	public void ReadContract(String contractID) throws SQLException {
+		//Retrieving it from this class so at some point can use it to manipulate data.
+		Object[] row = {contractID,saleStatus,ownership,delivery,duration,resources,price,commencedate};
+		ContractDB c1 = new ContractDB();
+		c1.retrieveRecord(contractID);
+		return;
 	}
-	
-	
-//	public void RecordContractDB() {
-//		Object[] contractRecord = new Object[8];
-//		contractRecord[0] = contractID; 
-//		contractRecord[1] = Integer.toString(ownership); 
-//		contractRecord[2] = String.valueOf(delivery);
-//		contractRecord[3] = Integer.toString(resources);
-//		contractRecord[4] = String.valueOf(saleStatus);
-//		contractRecord[5] = Integer.toString(duration);
-//		contractRecord[6] = Integer.toString(price);
-//		contractRecord[7] = Long.toString(commencedate);
-//		return;
-//	}
+
 }
