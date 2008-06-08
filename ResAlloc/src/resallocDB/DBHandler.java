@@ -28,6 +28,17 @@ public class DBHandler {
 		+ "VALUES(?,?,?,?,?,?,?,?)";
 	String retrieverowcontracttbl = "SELECT * from contractTbl WHERE contractID=?";
 	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=?";
+	
+	private String contractID;
+	private boolean saleStatus;
+	private int ownership;  		//Ownership is the unique ID of the owner of the contract.
+	private boolean delivery;
+	private int duration;
+	private int resources;
+	private int price;
+	private long commencedate;		//Date the contract is in effect from. 
+	
+	
 	public void opendbConnection() {
 		try {		
 			ds.setServerName(host);
@@ -37,11 +48,6 @@ public class DBHandler {
 			ds.setPassword(pw);
 			
 			con = (Connection) ds.getConnection();
-			// Getting database info
-			DatabaseMetaData meta = con.getMetaData();
-			System.out.println("Server name: "+ meta.getDatabaseProductName());
-			System.out.println("Server version: "+ meta.getDatabaseProductVersion());
-			System.out.println("Driver version: "+ meta.getDriverVersion());
 		} catch (Exception e) {
 			System.err.println("Exception: "+e.getMessage());
 		}
@@ -79,18 +85,11 @@ public class DBHandler {
 	public String getDb() {
 		return db;
 	}
-	public void committoContracttbl(String contractID,
-									boolean saleStatus,
-									int ownership,
-									boolean delivery,
-									int duration,
-									int resources,
-									int price,
-									long commencedate){
+	public void committoContracttbl(){
 		try {
 			PreparedStatement ps = con.prepareStatement(rowstatementcontracttbl);
 			ps.setString(1,contractID);
-			ps.setBoolean(2, saleStatus);
+			ps.setBoolean(2, saleStatus );
 			ps.setInt(3, ownership);
 			ps.setBoolean(4, delivery);
 			ps.setInt(5, duration);
@@ -106,69 +105,63 @@ public class DBHandler {
 		Statement s = con.createStatement();
 		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
 		while (rs.next()){
-			boolean saleStatus = rs.getBoolean("saleStatus");
-			int ownership = rs.getInt("ownership");
-			boolean delivery = rs.getBoolean("delivery");
-			int duration = rs.getInt("duration");
-			int resources = rs.getInt("resources");
-			int price = rs.getInt("price");
-			long commencedate = rs.getLong("commencedate");
-			System.out.println(saleStatus+" "+
-							   ownership+" "+
-							   delivery+" "+
-							   duration+" "+
-							   resources+" "+
-							   price+" "+
-							   commencedate+" ");
+			saleStatus = rs.getBoolean("saleStatus");
+			ownership = rs.getInt("ownership");
+			delivery = rs.getBoolean("delivery");
+			duration = rs.getInt("duration");
+			resources = rs.getInt("resources");
+			price = rs.getInt("price");
+			commencedate = rs.getLong("commencedate");
 		}
 		return;
 	}
-	public boolean retrieveSaleStatus(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		boolean delivery = rs.getBoolean("saleStatus");
-		return delivery;
+	
+	public String getContractID() {
+		return contractID;
 	}
-	public int retrieveOwnership(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		int ownership = rs.getInt("saleStatus");
+	public void setContractID(String contractID) {
+		this.contractID = contractID;
+	}
+	public boolean isSaleStatus() {
+		return saleStatus;
+	}
+	public void setSaleStatus(boolean saleStatus) {
+		this.saleStatus = saleStatus;
+	}
+	public int getOwnership() {
 		return ownership;
 	}
-	public boolean retrieveDelivery(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		boolean delivery = rs.getBoolean("delivery");
+	public void setOwnership(int ownership) {
+		this.ownership = ownership;
+	}
+	public boolean isDelivery() {
 		return delivery;
 	}
-	public int retrieveDuration(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		int duration = rs.getInt("duration");
+	public void setDelivery(boolean delivery) {
+		this.delivery = delivery;
+	}
+	public int getDuration() {
 		return duration;
 	}
-	public int retrieveResources(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		int resources = rs.getInt("resources");
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public int getResources() {
 		return resources;
 	}
-	public int retrievePrice(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		int price = rs.getInt("price");
+	public void setResources(int resources) {
+		this.resources = resources;
+	}
+	public int getPrice() {
 		return price;
 	}
-	public long retrieveCommenceDate(String contractID) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
-		long commenceDate = rs.getLong("commencedate");
-		return commenceDate;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public void deleteRowinContracttbl(String contractID) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(drcontracttbl);
-		ps.setString(1,contractID);
-		ps.executeUpdate();
-		return;
+	public long getCommencedate() {
+		return commencedate;
+	}
+	public void setCommencedate(long commencedate) {
+		this.commencedate = commencedate;
 	}
 }
