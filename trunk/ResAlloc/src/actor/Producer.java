@@ -1,11 +1,10 @@
 package actor;
 
 import java.sql.SQLException;
-
-import contract.Contract;
+import contract.ContractDB;
 
 public class Producer extends Customer {
-	private Contract productContract = new Contract();	//Already declared in Seller class.
+	private ContractDB productContract = new ContractDB();	//Already declared in Seller class.
 	
 	public Producer(int customerID){
 		setCustomerNumber(customerID);		
@@ -14,16 +13,16 @@ public class Producer extends Customer {
 			int resources) throws Exception {
 		productContract.setPrice(price);
 		productContract.setDuration(time);
-		productContract.setContractID();
+		productContract.createContractID();
 		productContract.setDelivery(delivery);
 		productContract.setResources(resources);
 		productContract.setOwnership(getCustomerNumber());
 		productContract.setSalesStatus(true);
-		productContract.RecordContractDB();
+		productContract.commitRecord();
 		return;
 	}
 	public void displayContract(String contractID) throws SQLException{
-		productContract.ReadContract(contractID);
+		productContract.retrieveRecord(contractID);
 		return;
 	}
 	public void deleteContract(){

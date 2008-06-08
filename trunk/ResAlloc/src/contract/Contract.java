@@ -1,8 +1,6 @@
 package contract;
 
-import java.sql.SQLException;
 import java.util.Calendar;
-import file.FileHandler;
 
 public class Contract {
 	private String contractID;
@@ -13,6 +11,7 @@ public class Contract {
 	private int resources;
 	private int price;
 	private long commencedate;		//Date the contract is in effect from. 
+	Object[] contractrow = {contractID,saleStatus,ownership,delivery,duration,resources,price,commencedate};
 /**
  * Eventually a pricing algorithm will take care of this from
  *perspective of the producer.  The sellers may or may not use
@@ -29,7 +28,7 @@ public class Contract {
 		Calendar time = Calendar.getInstance();
 		commencedate = time.getTimeInMillis();
 	}
-	public String setContractID() throws Exception {	//Set the contract ID.
+	public String createContractID() throws Exception {	//Set the contract ID.
 		ContractID myID = new ContractID();	
 		contractID = (String) myID.createID();
 		return contractID;
@@ -86,36 +85,18 @@ public class Contract {
 	public long getCommencedate() {
 		return commencedate;
 	}
-	/**
-	 * Writes the contract attributes somewhere...
-	 * @param fileName Name of the data target.
-	 * @author Matthew Yee
-	 */
-	public void RecordContractFile(String fileName) {	//In particular, this method writes to a file.
-		FileHandler F1 = new FileHandler();
-		String[] contractRecord = new String[8];
-		contractRecord[0] = contractID; 
-		contractRecord[1] = Integer.toString(ownership); 
-		contractRecord[2] = String.valueOf(delivery);
-		contractRecord[3] = Integer.toString(resources);
-		contractRecord[4] = String.valueOf(saleStatus);
-		contractRecord[5] = Integer.toString(duration);
-		contractRecord[6] = Integer.toString(price);
-		contractRecord[7] = Long.toString(commencedate);
-		F1.writeFile(fileName, contractRecord);
+	public void setContractID(String contractID) {
+		this.contractID = contractID;
+	}
+	public void displayContract(){
+		System.out.println(contractID+" "+
+						   saleStatus+" "+
+						   ownership+" "+
+						   delivery+" "+
+						   duration+" "+
+						   resources+" "+
+						   price+" "+
+						   commencedate);
 		return;
 	}
-	public void RecordContractDB() throws SQLException {	
-		ContractDB c1 = new ContractDB();
-		c1.commitRecord(contractID, saleStatus, ownership, delivery, duration, resources, price, commencedate);
-		return;
-	}
-	public void ReadContract(String contractID) throws SQLException {
-		//Retrieving it from this class so at some point can use it to manipulate data.
-		Object[] row = {contractID,saleStatus,ownership,delivery,duration,resources,price,commencedate};
-		ContractDB c1 = new ContractDB();
-		c1.retrieveRecord(contractID);
-		return;
-	}
-
 }

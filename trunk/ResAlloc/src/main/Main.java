@@ -15,7 +15,7 @@ public class Main {
 		Producer George = new Producer(54321);
 		
 		Matthew.produceContract(price,time,delivery,resources);
-		George.produceContract(13123,99,false,8888);
+		George.produceContract(13123,99,true,777777);
 		George.displayContract("4426415922b47017e67d3889a0e48939");
 	}
 }
