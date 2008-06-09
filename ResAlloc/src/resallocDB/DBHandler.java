@@ -115,7 +115,12 @@ public class DBHandler {
 		}
 		return;
 	}
-	
+	public void deleteRecordfromContracttbl(String contractID) throws SQLException{
+		PreparedStatement ps = con.prepareStatement(drcontracttbl);
+		ps.setString(1,contractID);
+		ps.executeUpdate();
+		return;
+	}
 	public String getContractID() {
 		return contractID;
 	}
