@@ -45,7 +45,7 @@ public class Contract {
 		ownership = ownerID;
 		return;
 	}
-	public void setSalesStatus(boolean status) {	//Flag whether the contract is for sale.
+	public void setSaleStatus(boolean status) {	//Flag whether the contract is for sale.
 		if (saleStatus!=status) saleStatus = status;
 		return;
 	}

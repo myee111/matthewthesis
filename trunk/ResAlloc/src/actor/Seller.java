@@ -1,20 +1,14 @@
 package actor;
-import contract.Contract;
+
+import java.sql.SQLException;
 
 public class Seller extends Customer{
-	private Contract productContract = new Contract();	//I don't think this will work.
-	
-	public void setSellContract(String contractID) {
-		Contract saleContract = getContract(contractID);
-		saleContract.setSalesStatus(true);
-		return;
+	public Seller(int customerID) {
+		super(customerID);
 	}
-	public void setSellContract() {
-		productContract.setSalesStatus(true);
+	public void setSellContract(String contractID) throws SQLException {
+		super.getContract(contractID);
+		Contract.setSaleStatus(true);
 		return;
-	}
-	public Contract getContract(String contractID) {
-		Contract myContract = new Contract();
-		return myContract;
 	}
 }
