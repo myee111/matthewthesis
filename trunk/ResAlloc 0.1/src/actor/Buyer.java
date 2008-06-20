@@ -1,6 +1,7 @@
 package actor;
 
 import java.sql.SQLException;
+import resallocDB.DBFundTbl;
 
 public class Buyer extends Customer{
 	public Buyer(int customerID) {
@@ -8,10 +9,17 @@ public class Buyer extends Customer{
 	}
 	public void buyContract(String contractID) throws SQLException{  
 		super.D1.retrieveRecordfromContracttbl(contractID);
-		//check buyer's funds against price.  If ok then
-		//withdraw x funds from buyer's account
-		//deposit x funds into seller's account
-		//change ownership
+		DBFundTbl F1 = new DBFundTbl();
+		F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
+		if (F1.getAmountTotal() >= super.D1.getPrice()){
+			F1.deductFunds(super.getCustomerNumber(), super.D1.getPrice());
+			F1.addFunds(super.D1.getOwnership(), super.D1.getPrice());
+			D1.setOwnership(super.getCustomerNumber());
+			D1.
+			System.out.println("Contract "+contractID+" bought.");
+		} else {
+			System.out.println("Not enough funds.");
+		}
 		return;
 	}
 }

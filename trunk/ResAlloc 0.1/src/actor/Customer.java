@@ -1,12 +1,13 @@
 package actor;
 
 import java.sql.SQLException;
-
 import resallocDB.DBContractTbl;
+import resallocDB.DBFundTbl;
 
 public class Customer {
 	private int customerNumber = 0;	
 	public DBContractTbl D1 = new DBContractTbl();
+	public DBFundTbl F1 = new DBFundTbl();
 	
 	public Customer(int customerID) {
 		setCustomerNumber(customerID);	
@@ -28,6 +29,10 @@ public class Customer {
 		System.out.print(D1.getResources()+" ");
 		System.out.print(D1.getPrice()+" ");
 		System.out.println(D1.getCommencedate());
+		return;
+	}
+	public void displayAmount(int ownership) throws SQLException{
+		System.out.println(F1.retrieveAmountfromFundstbl(ownership));
 		return;
 	}
 }
