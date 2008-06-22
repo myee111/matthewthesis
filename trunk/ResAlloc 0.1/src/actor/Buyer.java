@@ -14,8 +14,8 @@ public class Buyer extends Customer{
 		if (F1.getAmountTotal() >= super.D1.getPrice()){
 			F1.deductFunds(super.getCustomerNumber(), super.D1.getPrice());
 			F1.addFunds(super.D1.getOwnership(), super.D1.getPrice());
-			D1.setOwnership(super.getCustomerNumber());
-			D1.
+			D1.setOwnership(contractID, super.getCustomerNumber());
+			D1.setSaleStatus(contractID, false);
 			System.out.println("Contract "+contractID+" bought.");
 		} else {
 			System.out.println("Not enough funds.");
