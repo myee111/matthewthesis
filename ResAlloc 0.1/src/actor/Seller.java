@@ -7,8 +7,7 @@ public class Seller extends Customer{
 		super(customerID);
 	}
 	public void setSellContract(String contractID) throws SQLException {
-		super.D1.retrieveRecordfromContracttbl(contractID);
-		super.D1.setSaleStatus(true);
+		super.D1.setSaleStatus(contractID, true);
 		return;
 	}
 }

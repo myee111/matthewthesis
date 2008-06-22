@@ -27,6 +27,8 @@ public class DBContractTbl extends DBHandler{
 		+ "VALUES(?,?,?,?,?,?,?,?)";
 	String retrieverowcontracttbl = "SELECT * from contractTbl WHERE contractID=?";
 	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=?";
+	String modifyStatus = "UPDATE contractTbl SET saleStatus=? WHERE contractID=?";
+	String modifyOwnership = "UPDATE contractTbl SET ownership=? WHERE contractID=?";
 	public void committoContracttbl(
 			String contractID,
 			boolean saleStatus,
@@ -101,11 +103,24 @@ public class DBContractTbl extends DBHandler{
 	public void setContractID(String contractID) {
 		this.contractID = contractID;
 	}
-	public void setSaleStatus(boolean saleStatus) {
-		this.saleStatus = saleStatus;
+	public void setSaleStatus(String contractID, boolean saleStatus) throws SQLException {
+		//needs to update the db
+		super.opendbConnection();
+		PreparedStatement ps = super.con.prepareStatement(modifyStatus);
+		ps.setBoolean(1, saleStatus);
+		ps.setString(2, contractID);
+		ps.executeUpdate();
+		super.closedbConnection();
+		return;
 	}
-	public void setOwnership(int ownership) {
-		this.ownership = ownership;
+	public void setOwnership(String contractID, int ownership) throws SQLException {
+		super.opendbConnection();
+		PreparedStatement ps = super.con.prepareStatement(modifyOwnership);
+		ps.setInt(1, ownership);
+		ps.setString(2, contractID);
+		ps.executeUpdate();
+		super.closedbConnection();
+		return;
 	}
 	public void setDelivery(boolean delivery) {
 		this.delivery = delivery;
