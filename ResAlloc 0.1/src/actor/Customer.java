@@ -3,22 +3,42 @@ package actor;
 import java.sql.SQLException;
 import resallocDB.DBContractTbl;
 import resallocDB.DBFundTbl;
-
+/**
+ * Customer superclass which contains DBContractTbl, DBFundTbl and customerNumber. 
+ * @author Walter
+ *
+ */
 public class Customer {
 	private int customerNumber = 0;	
 	public DBContractTbl D1 = new DBContractTbl();
 	public DBFundTbl F1 = new DBFundTbl();
-	
+	/**
+	 * 
+	 * @param customerID
+	 */
 	public Customer(int customerID) {
 		setCustomerNumber(customerID);	
 	}
+	/**
+	 * 
+	 * @return customerNumber
+	 */
 	public int getCustomerNumber() {
 		return customerNumber;
 	}
+	/**
+	 * 
+	 * @param customerID
+	 */
 	public void setCustomerNumber(int customerID) {
 		customerNumber = customerID;
 		return;
 	}
+	/**
+	 * 
+	 * @param contractID
+	 * @throws SQLException
+	 */
 	public void displayContract(String contractID) throws SQLException{
 		D1.retrieveRecordfromContracttbl(contractID);
 		System.out.print(contractID+" ");
