@@ -2,7 +2,11 @@ package resallocDB;
 
 import java.sql.*;
 import com.mysql.jdbc.Connection;
-
+/**
+ * 
+ * @author Walter
+ *
+ */
 public class DBHandler{
 	/**
 	 * Code stolen from http://www.herongyang.com/jdbc/MySQL-JDBC-Driver-Server-Information.html

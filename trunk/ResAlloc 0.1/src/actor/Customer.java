@@ -51,6 +51,11 @@ public class Customer {
 		System.out.println(D1.getCommencedate());
 		return;
 	}
+	/**
+	 * Displays the amount of funds belonging to a customer.
+	 * @param ownership
+	 * @throws SQLException
+	 */
 	public void displayAmount(int ownership) throws SQLException{
 		System.out.println(F1.retrieveAmountfromFundstbl(ownership));
 		return;
