@@ -7,6 +7,10 @@ public class Buyer extends Customer{
 	public Buyer(int customerID) {
 		super(customerID);
 	}
+	/**
+	 * @param contractID
+	 * @throws SQLException
+	 */
 	public void buyContract(String contractID) throws SQLException{  
 		super.D1.retrieveRecordfromContracttbl(contractID);
 		DBFundTbl F1 = new DBFundTbl();
