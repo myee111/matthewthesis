@@ -14,6 +14,11 @@ public class Seller extends Customer{
 	public Seller(int customerID) {
 		super(customerID);
 	}
+	/**
+	 * Changes the status of the contract to be 'sold'.  
+	 * @param contractID
+	 * @throws SQLException
+	 */
 	public void setSellContract(String contractID) throws SQLException {
 		super.D1.setSaleStatus(contractID, true);
 		return;
