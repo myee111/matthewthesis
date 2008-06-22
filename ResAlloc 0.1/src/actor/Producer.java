@@ -13,15 +13,19 @@ import resallocDB.DBContractTbl;
  *
  */
 public class Producer extends Customer {
+	/**
+	 * Creates a new Producer object and sets the customer ID.
+	 * @param customerID
+	 */
 	public Producer(int customerID) {
 		super(customerID);
 	}
 	/**
 	 * Produces a contract and inserts it into the database.
-	 * @param price
-	 * @param time
-	 * @param delivery
-	 * @param resources
+	 * @param price The price of the contract.
+	 * @param time The time that the contract is valid.
+	 * @param delivery The delivery status of the contract.
+	 * @param resources The associated resources to be delivered in the contract.
 	 * @throws Exception
 	 */
 	public void produceContract(int price, int time, boolean delivery,
@@ -42,7 +46,7 @@ public class Producer extends Customer {
 	}
 	/**
 	 * Deletes contract from the database.
-	 * @param contractID
+	 * @param contractID The contract string identifier.
 	 * @throws SQLException
 	 */
 	public void deleteContract(String contractID) throws SQLException{
