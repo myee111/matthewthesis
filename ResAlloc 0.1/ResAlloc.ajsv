@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram scope="scopeElementSets.elementSet.Switchable Subtypes" style="standardDiagramStyles.diagramStyle.Standard Basic Style" version="1.5.3">
+        <class className="actor.Customer" project="ResAlloc 0.1" xLocation="0" yLocation="0"/>
+        <class className="actor.Producer" project="ResAlloc 0.1" xLocation="20" yLocation="20"/>
+        <class className="actor.Seller" project="ResAlloc 0.1" xLocation="40" yLocation="40"/>
+        <class className="actor.Buyer" project="ResAlloc 0.1" xLocation="60" yLocation="60"/>
+        <class className="main.Main" project="ResAlloc 0.1" xLocation="80" yLocation="80"/>
+        <class className="resallocDB.DBFundTbl" project="ResAlloc 0.1" xLocation="100" yLocation="100"/>
+        <class className="resallocDB.DBContractTbl" project="ResAlloc 0.1" xLocation="120" yLocation="120"/>
+        <class className="resallocDB.DBHandler" project="ResAlloc 0.1" xLocation="140" yLocation="140"/>
+    </diagram>
+</ajsv>
