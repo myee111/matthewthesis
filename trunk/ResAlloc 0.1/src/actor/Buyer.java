@@ -1,6 +1,8 @@
 package actor;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import resallocDB.DBFundTbl;
 /**
  * The Buyer class contains methods that allow a customer to purchase a contract.
@@ -8,6 +10,7 @@ import resallocDB.DBFundTbl;
  *
  */
 public class Buyer extends Customer{
+	List forSale;
 	/**
 	 * Passes customerID to superclass.
 	 * @param customerID
@@ -37,5 +40,13 @@ public class Buyer extends Customer{
 			System.out.println("Not enough funds.");
 		}
 		return;
+	}
+	/**
+	 * Searches the database for contract with saleStatus flag set to 'yes'.  
+	 * The forSale list within (this) object contains a list of all the contracts that are for sale. 
+	 * @param sale
+	 */
+	public void findContractForSale(int sale){
+		
 	}
 }
