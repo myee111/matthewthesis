@@ -2,13 +2,13 @@ package main;
 
 //import resallocDB.DBFundTbl;
 //import actor.Buyer;
-import actor.PAgent;
-//import actor.Producer;
+import agents.PAgent;
 
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		int producerID		= 0;				//unique Producer ID number
+		int iterations		= 5;
 //		int price			= 100000;			//cost of the contract
 //		int time			= 12;				//duration of the contract
 //		boolean delivery	= false;			//status of delivery of resource
@@ -27,7 +27,7 @@ public class Main {
 //		System.out.println(F.retrieveAmountfromFundstbl(6330));
 //		MatthewBuy.buyContract("4426415922b47017e67d3889a0e48939");
 //		MatthewProduce.displayContract("4426415922b47017e67d3889a0e48939");
-		new PAgent(producerID).start();
+		new PAgent(producerID,iterations).start();
 		
 	}
 }
