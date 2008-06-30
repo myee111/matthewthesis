@@ -81,7 +81,17 @@ public class DBContractTbl extends DBHandler{
 	public String getContractID() {
 		return contractID;
 	}
-	public boolean isSaleStatus() {
+	public synchronized boolean isDBSaleStatus(String contractID) throws SQLException {
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT saleStatus FROM contractTbl WHERE contractID='"+contractID+"'");
+		while (rs.next()){
+			saleStatus = rs.getBoolean("saleStatus");
+		}
+		super.closedbConnection();
+		return saleStatus;
+	}
+	public boolean isSaleStatus(){
 		return saleStatus;
 	}
 	public int getOwnership() {
@@ -115,7 +125,7 @@ public class DBContractTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
-	public void setOwnership(String contractID, int ownership) throws SQLException {
+	public synchronized void setOwnership(String contractID, int ownership) throws SQLException {
 		super.opendbConnection();
 		PreparedStatement ps = super.con.prepareStatement(modifyOwnership);
 		ps.setInt(1, ownership);
