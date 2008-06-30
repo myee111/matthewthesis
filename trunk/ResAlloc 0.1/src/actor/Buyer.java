@@ -24,17 +24,18 @@ public class Buyer extends Customer{
 	 * @param contractID The unique string identifier of the contract.
 	 * @throws SQLException
 	 */
-	public void buyContract(String contractID) throws SQLException{  
+	public synchronized void buyContract(String contractID) throws SQLException{  
 		super.D1.retrieveRecordfromContracttbl(contractID);
 		super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
-		if (super.F1.getAmountTotal() >= super.D1.getPrice()){
+		if (super.F1.getAmountTotal() >= super.D1.getPrice() && super.D1.isDBSaleStatus(contractID)){
 			super.F1.deductFunds(super.getCustomerNumber(), super.D1.getPrice());
 			super.F1.addFunds(super.D1.getOwnership(), super.D1.getPrice());
 			super.D1.setOwnership(contractID, super.getCustomerNumber());
+			System.out.println("Contract "+contractID+" ownership set.");
 			super.D1.setSaleStatus(contractID, false);
 			System.out.println("Contract "+contractID+" bought.");
 		} else {
-			System.out.println("Not enough funds.");
+			System.out.println("Not enough funds or contract not for sale.");
 		}
 		return;
 	}
@@ -43,16 +44,16 @@ public class Buyer extends Customer{
 	 * The forSale list within (this) object contains a list of all the contracts that 
 	 * are for sale.  The retrieveForSalefromContracttbl method should return results
 	 * that cost less than the total funds the customer has in his account. 
-	 * @param sale
+	 * @param numbertobuy The number of contracts that the customer wishes to buy.
 	 * @throws SQLException 
 	 */
-	public void findContractForSale(int numbertobuy) throws SQLException{
+	public void purchase(int numbertobuy) throws SQLException{
 		int a = super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
 		System.out.println("Funds: "+a);
 		super.D1.retrieveForSalefromContracttbl(a);
 		Iterator<String> i = super.D1.forSale.listIterator();
 		while(i.hasNext() && numbertobuy>0){
-			System.out.println(i.next());
+			buyContract(i.next());
 			numbertobuy--;
 		}
 		return;

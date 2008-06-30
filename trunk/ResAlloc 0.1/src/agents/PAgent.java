@@ -10,6 +10,11 @@ import actor.Producer;
 public class PAgent extends Thread{
 	int ID;
 	int iter;
+	/**
+	 * This is a production agent.
+	 * @param customerID The ID of the producer.
+	 * @param iterations The number of contracts desired.
+	 */
 	public PAgent(int customerID,int iterations){
 		System.out.println("Thread: "+customerID);
 		ID = customerID;
