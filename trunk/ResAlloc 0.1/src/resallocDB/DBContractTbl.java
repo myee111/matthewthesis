@@ -16,6 +16,7 @@ public class DBContractTbl extends DBHandler{
 	int price;
 	long commencedate;
 	public List<String> forSale = new LinkedList<String>();
+	public List<String> disch = new LinkedList<String>();
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -158,5 +159,27 @@ public class DBContractTbl extends DBHandler{
 		}
 		super.closedbConnection();
 		return;
+	}
+	public void retAllDisch(int ownership) throws SQLException{
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE ownership='"+ownership+"'");
+		while (rs.next()){
+			if (System.currentTimeMillis()-rs.getInt("duration")<=rs.getLong("commencedate")){
+				disch.add(rs.getString("contractID"));
+			}
+		}
+		super.closedbConnection();
+		return;
+	}
+	public int retRes(String contractID) throws SQLException{
+		int res = 0;
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE contractID='"+contractID+"'");
+		while (rs.next()){
+			res = rs.getInt("resources");
+		}
+		return res;
 	}
 }

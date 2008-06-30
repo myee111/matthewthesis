@@ -1,6 +1,7 @@
 package agents;
 
 import actor.Buyer;
+import actor.Seller;
 
 /**
  * Testing a buying Agent.
@@ -23,6 +24,7 @@ public class BAgent extends Thread {
 	public void run(){
 		for(int i=0; i<iter; i++){
 			Buyer B1 = new Buyer(ID);
+//			Seller S1 = new Seller(ID);
 			try {
 				B1.purchase(1);
 			} catch (Exception e) {
