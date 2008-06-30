@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.*;
 
 public class DBContractTbl extends DBHandler{
 	String contractID;
@@ -14,6 +15,7 @@ public class DBContractTbl extends DBHandler{
 	int resources;
 	int price;
 	long commencedate;
+	public List<String> forSale = new LinkedList<String>();
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -137,5 +139,14 @@ public class DBContractTbl extends DBHandler{
 	public void setCommencedate(long commencedate) {
 		this.commencedate = commencedate;
 	}
-
+	public void retrieveForSalefromContracttbl(int fundsleft) throws SQLException{
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE saleStatus=true AND price <="+fundsleft);
+		while (rs.next()){
+			forSale.add(rs.getString("contractID"));
+		}
+		super.closedbConnection();
+		return;
+	}
 }
