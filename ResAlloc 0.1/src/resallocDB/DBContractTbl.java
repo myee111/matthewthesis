@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-
+/**
+ * A class for handling all operations to do with the Contract Table in the resalloc DB.
+ * @author Walter
+ *
+ */
 public class DBContractTbl extends DBHandler{
 	String contractID;
 	boolean saleStatus;
@@ -17,6 +21,7 @@ public class DBContractTbl extends DBHandler{
 	long commencedate;
 	public List<String> forSale = new LinkedList<String>();
 	public List<String> disch = new LinkedList<String>();
+	public List<String> rcpa = new LinkedList<String>();	//rcpa = resource contracts per agent
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -32,6 +37,18 @@ public class DBContractTbl extends DBHandler{
 	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=?";
 	String modifyStatus = "UPDATE contractTbl SET saleStatus=? WHERE contractID=?";
 	String modifyOwnership = "UPDATE contractTbl SET ownership=? WHERE contractID=?";
+	/**
+	 * Puts a new contract record into the database. 
+	 * @param contractID Unique ID of the contract.
+	 * @param saleStatus True denotes that the contract is for sale.
+	 * @param ownership ID of the owner of the contract.
+	 * @param delivery True denotes that the contract has been delivered and resources have been used.
+	 * @param duration The lifetime of the contract.
+	 * @param resources The resources associated with the contract.
+	 * @param price The price of the contract.
+	 * @param commencedate The date the contract was created.
+	 * @throws SQLException
+	 */
 	public void committoContracttbl(
 			String contractID,
 			boolean saleStatus,
@@ -55,6 +72,12 @@ public class DBContractTbl extends DBHandler{
 			super.closedbConnection();	
 			return;
 	}
+	/**
+	 * Gets the contract record from the database and sets all the appropriate attributes within
+	 * the class to the attributes in the contract.
+	 * @param contractID
+	 * @throws SQLException
+	 */
 	public void retrieveRecordfromContracttbl(String contractID) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
@@ -126,7 +149,7 @@ public class DBContractTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
-	public synchronized void setOwnership(String contractID, int ownership) throws SQLException {
+	public void setOwnership(String contractID, int ownership) throws SQLException {
 		super.opendbConnection();
 		PreparedStatement ps = super.con.prepareStatement(modifyOwnership);
 		ps.setInt(1, ownership);
@@ -150,6 +173,13 @@ public class DBContractTbl extends DBHandler{
 	public void setCommencedate(long commencedate) {
 		this.commencedate = commencedate;
 	}
+	/**
+	 * Gets a list of all the contracts that are for sale and cost less than or equal to the value
+	 * of 'fundsleft'.  This method is used to build a list of contracts for an agent to buy in the 
+	 * actor.Buyer class.
+	 * @param fundsleft
+	 * @throws SQLException
+	 */
 	public void retrieveForSalefromContracttbl(int fundsleft) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();

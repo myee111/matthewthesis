@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 
 import resallocDB.DBContractTbl;
+import resallocDB.DBOwnerRes;
 
 /**
  * This class will simulate the consumption of resources. 
@@ -14,23 +15,24 @@ public class Consumption {
 	int resources;
 	int owner;
 	private DBContractTbl D1 = new DBContractTbl();
+	DBOwnerRes OR = new DBOwnerRes();
 	/**
 	 * Constructor class.
-	 * @param sres Starting amount of resources.
 	 * @throws SQLException 
 	 */
-	public Consumption(int sres,int ownership) throws SQLException{
-		resources = sres; //Eventually this value will have to sit in a db table somewhere
+	public Consumption(int ownership) throws SQLException{
 		owner = ownership;
+		resources = OR.retrieveAmountfromORtbl(ownership);
 		dischargeDue();
 		modifyRes();
 	}
 	/**
 	 * This method modifies the amount of resources owned by the agent.
+	 * @throws SQLException 
 	 */
-	public void modifyRes(){
-		if (resources > 0){
-			resources--;
+	public void modifyRes() throws SQLException{
+		if (OR.getResTotal() > 0){
+			OR.deductRes(owner, 1);
 		} else {
 			System.out.println("Out of resources and contracts!");
 		}
@@ -45,7 +47,7 @@ public class Consumption {
 		D1.retAllDisch(owner);
 		Iterator<String> i = D1.disch.listIterator();
 		while (i.hasNext()){
-			resources = resources+D1.retRes(i.next());
+			OR.addRes(owner, D1.retRes(i.next()));
 		}
 		
 	}
