@@ -5,7 +5,7 @@ import agents.*;
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
-		int producerID		= 0;				//unique Producer ID number
+//		int producerID		= 0;				//unique Producer ID number
 //		int iterations		= 50;
 //		int price			= 100000;			//cost of the contract
 //		int time			= 12;				//duration of the contract
@@ -31,8 +31,11 @@ public class Main {
 //		DBFundTbl F1 = new DBFundTbl();
 //		F1.committoFundstbl(1, 100000);
 //		F1.committoFundstbl(2, 100000);
-		
-		new PAgent(producerID,1).start();
+		/**
+		 * Generate new contracts.  PAgent(producerID,noOfContracts).  The producer should always have an ID
+		 * of 0. 
+		 */
+//		new PAgent(0,9).start();
 		for (int i = 0; i<1; i++){
 			Thread t1 = new RationalActor(1);
 			t1.start();

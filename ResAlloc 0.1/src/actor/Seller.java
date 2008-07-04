@@ -14,12 +14,18 @@ public class Seller extends Customer{
 	public Seller(int customerID) {
 		super(customerID);
 	}
+	/**
+	 * Sells a contract.
+	 * @param contracts Number of contracts to be sold.
+	 */
 	public void sell(int contracts) {
-		System.out.println("A contract is sold.");
+		for (int i=0; i<contracts; i++){
+			System.out.println("A contract is sold.");
+		}
 		return;
 	}
 	/**
-	 * Changes the status of the contract to be 'sold'.  
+	 * Changes the status of the contract to be 'sold' in the contract record in the resallocDB.  
 	 * @param contractID
 	 * @throws SQLException
 	 */

@@ -15,7 +15,8 @@ public class RationalActor extends Thread {
 	int surplus;
 	int resources;
 	/**
-	 * This is the buyer agent.
+	 * This is the buyer agent.  Upon instantiation, 'ID' is set to customerID, 'slack' is set, 'surplus' is set
+	 * and resources is set to the amount of resources belonging to a given ID.
 	 * @param customerID The ID of the buyer.
 	 * @throws SQLException 
 	 */
