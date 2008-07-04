@@ -12,18 +12,18 @@ import java.sql.Statement;
  */
 public class DBOwnerRes extends DBHandler{
 	int resTotal;
-	String rowstatementORtbl = "INSERT INTO funds("
+	String rowstatementORtbl = "INSERT INTO owner_resources("
 		+ "ownership,"
 		+ "owner_res)"
 		+ "VALUES(?,?)";
-	String modifyres = "UPDATE funds SET owner_res=? WHERE ownership=?";
+	String modifyres = "UPDATE owner_resources SET owner_res=? WHERE ownership=?";
 	/**
 	 * Commits the total resources available to an actor. 
 	 * @param ownership The unique ID of the owner.
 	 * @param res The amount of total resources to be comitted to the owner. 
 	 * @throws SQLException
 	 */
-	public void committoFundstbl(int ownership, int res) throws SQLException{
+	public void committoORtbl(int ownership, int res) throws SQLException{
 		super.opendbConnection();
 		PreparedStatement ps = super.con.prepareStatement(rowstatementORtbl);
 		ps.setInt(1,ownership);
@@ -38,10 +38,10 @@ public class DBOwnerRes extends DBHandler{
 	 * @return The quantity of resources available to an actor.
 	 * @throws SQLException
 	 */
-	public int retrieveAmountfromFundstbl(int ownership) throws SQLException{
+	public int retrieveAmountfromORtbl(int ownership) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from funds WHERE ownership='"+ownership+"'");
+		ResultSet rs = s.executeQuery("SELECT * from owner_resources WHERE ownership='"+ownership+"'");
 		while (rs.next()){
 			resTotal = rs.getInt("owner_res");
 		}
@@ -50,7 +50,7 @@ public class DBOwnerRes extends DBHandler{
 	}
 	public void deductRes(int ownership, int res) throws SQLException {
 		int newamt=0;
-		retrieveAmountfromFundstbl(ownership);
+		retrieveAmountfromORtbl(ownership);
 		if (getResTotal()>res){
 			newamt = getResTotal()-res;
 			super.opendbConnection();

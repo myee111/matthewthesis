@@ -32,8 +32,8 @@ public class Main {
 //		F1.committoFundstbl(1, 100000);
 //		F1.committoFundstbl(2, 100000);
 		
-		new PAgent(producerID,iterations).start();
-		for (int i = 0; i<5; i++){
+		new PAgent(producerID,1).start();
+		for (int i = 0; i<1; i++){
 			Thread t1 = new BAgent(1,1);
 			t1.start();
 			t1.join();
@@ -41,7 +41,5 @@ public class Main {
 			t2.start();
 			t2.join();
 		}
-		
-//		D1.isDBSaleStatus("fc26d6faa8a85a4cbb69aae66c56015c");
 	}
 }
