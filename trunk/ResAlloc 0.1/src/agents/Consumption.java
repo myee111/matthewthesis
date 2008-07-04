@@ -17,7 +17,9 @@ public class Consumption {
 	private DBContractTbl D1 = new DBContractTbl();
 	DBOwnerRes OR = new DBOwnerRes();
 	/**
-	 * Constructor class.
+	 * Constructor class.  Upon instantiation, the resources owned by 'ownership' are retrieved from the database.
+	 * The local 'resources' variable is set to the owner's resources in the DBOwnerRes record and the 'owner' 
+	 * is set to 'ownership'.
 	 * @throws SQLException 
 	 */
 	public Consumption(int ownership) throws SQLException{

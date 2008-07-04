@@ -21,7 +21,6 @@ public class DBContractTbl extends DBHandler{
 	long commencedate;
 	public List<String> forSale = new LinkedList<String>();
 	public List<String> disch = new LinkedList<String>();
-	public List<String> rcpa = new LinkedList<String>();	//rcpa = resource contracts per agent
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -176,7 +175,7 @@ public class DBContractTbl extends DBHandler{
 	/**
 	 * Gets a list of all the contracts that are for sale and cost less than or equal to the value
 	 * of 'fundsleft'.  This method is used to build a list of contracts for an agent to buy in the 
-	 * actor.Buyer class.
+	 * actor.Buyer class.  The contract IDs are inserted into the public list 'forSale'. 
 	 * @param fundsleft
 	 * @throws SQLException
 	 */
@@ -190,6 +189,12 @@ public class DBContractTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
+	/**
+	 * Gets a list of all contracts that have reached their delivery date.  The contract IDs are inserted into 
+	 * the public list, 'disch'
+	 * @param ownership
+	 * @throws SQLException
+	 */
 	public void retAllDisch(int ownership) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
@@ -202,6 +207,12 @@ public class DBContractTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
+	/**
+	 * This method will return the resources for a given contract.
+	 * @param contractID
+	 * @return The resrources in the contract.
+	 * @throws SQLException
+	 */
 	public int retRes(String contractID) throws SQLException{
 		int res = 0;
 		super.opendbConnection();
@@ -211,5 +222,22 @@ public class DBContractTbl extends DBHandler{
 			res = rs.getInt("resources");
 		}
 		return res;
+	}
+	/**
+	 * Calculates a running total of all resources belonging to a specified owner.
+	 * Actually I don't think I need this method.
+	 * @param owner
+	 * @return 
+	 * @throws SQLException
+	 */
+	public int retTotalRes(String owner) throws SQLException{
+		int rcpa=0; //rcpa = resource contracts per agent
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE contractID='"+contractID+"'");
+		while (rs.next()){
+			rcpa = rcpa+rs.getInt("resources");
+		}
+		return rcpa;
 	}
 }
