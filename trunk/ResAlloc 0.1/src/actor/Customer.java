@@ -3,7 +3,6 @@ package actor;
 import java.sql.SQLException;
 import resallocDB.DBContractTbl;
 import resallocDB.DBFundTbl;
-import resallocDB.DBOwnerRes;
 /**
  * Customer superclass which contains DBContractTbl, DBFundTbl and customerNumber. 
  * @author Walter
@@ -13,7 +12,6 @@ public class Customer {
 	private int customerNumber = 0;	
 	public DBContractTbl D1 = new DBContractTbl();
 	public DBFundTbl F1 = new DBFundTbl();
-	public DBOwnerRes O1 = new DBOwnerRes();
 	/**
 	 * 
 	 * @param customerID

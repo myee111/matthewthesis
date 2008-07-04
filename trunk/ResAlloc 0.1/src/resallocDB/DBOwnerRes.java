@@ -48,6 +48,12 @@ public class DBOwnerRes extends DBHandler{
 		super.closedbConnection();
 		return resTotal;
 	}
+	/**
+	 * 
+	 * @param ownership
+	 * @param res
+	 * @throws SQLException
+	 */
 	public void deductRes(int ownership, int res) throws SQLException {
 		int newamt=0;
 		retrieveAmountfromORtbl(ownership);
@@ -60,6 +66,18 @@ public class DBOwnerRes extends DBHandler{
 			ps.executeUpdate();
 			super.closedbConnection();
 		} 
+		return;
+	}
+	public void addRes(int ownership, int res) throws SQLException {
+		int newamt=0;
+		retrieveAmountfromORtbl(ownership);
+		newamt = getResTotal()+res;
+		super.opendbConnection();
+		PreparedStatement ps = super.con.prepareStatement(modifyres);
+		ps.setInt(1, newamt);
+		ps.setInt(2, ownership);
+		ps.executeUpdate();
+		super.closedbConnection();
 		return;
 	}
 	public int getResTotal() {
