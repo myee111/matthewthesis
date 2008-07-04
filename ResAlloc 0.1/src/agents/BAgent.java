@@ -1,7 +1,6 @@
 package agents;
 
 import actor.Buyer;
-import actor.Seller;
 
 /**
  * Testing a buying Agent.

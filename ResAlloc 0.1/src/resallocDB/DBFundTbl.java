@@ -34,6 +34,11 @@ public class DBFundTbl extends DBHandler{
 		super.closedbConnection();
 		return amountTotal;
 	}
+	/**
+	 * I don't know why I wrote this.  I don't think it ever gets used.
+	 * @param ownership
+	 * @throws SQLException
+	 */
 	public void deleteRecordfromContracttbl(int ownership) throws SQLException{
 		super.opendbConnection();
 		PreparedStatement ps = con.prepareStatement(drfundstbl);
@@ -42,6 +47,12 @@ public class DBFundTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
+	/**
+	 * I don't think this method is necessary either. 
+	 * @param ownership
+	 * @param price
+	 * @throws SQLException
+	 */
 	public void modifyFunds(int ownership, int price) throws SQLException{
 		super.opendbConnection();
 		PreparedStatement ps = super.con.prepareStatement(modifyfund);
@@ -51,6 +62,14 @@ public class DBFundTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
+	/**
+	 * Adds funds to a given actor.  Before this method is to be executed, retrieveAmountFromFundsTbl() 
+	 * _must_ be executed first.  The retrieveAmountFromFundsTbl() populates the local variables 'ownership'
+	 * and 'amounttotal'.  
+	 * @param ownership The unique ID of the actor from whom funds will be deducted.
+	 * @param price The amount of funds to be deducted from the actor. 
+	 * @throws SQLException
+	 */
 	public void addFunds(int ownership, int price) throws SQLException {
 		int newamt=0;
 		retrieveAmountfromFundstbl(ownership);
@@ -63,6 +82,12 @@ public class DBFundTbl extends DBHandler{
 		super.closedbConnection();
 		return;
 	}
+	/**
+	 * Works the same way as addFunds except this deducts funds.  
+	 * @param ownership
+	 * @param price
+	 * @throws SQLException
+	 */
 	public void deductFunds(int ownership, int price) throws SQLException {
 		int newamt=0;
 		retrieveAmountfromFundstbl(ownership);
