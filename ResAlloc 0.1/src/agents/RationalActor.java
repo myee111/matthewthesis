@@ -1,6 +1,8 @@
 package agents;
 
 import java.sql.SQLException;
+import java.util.Iterator;
+
 import actor.Seller;
 import actor.Buyer;
 
@@ -41,7 +43,15 @@ public class RationalActor extends Thread {
 				B1.purchase(1);
 			} else {
 				if (resources>surplus){
-					S1.sell(1);
+					if (S1.D1.forSale.size()>0) {
+						Iterator<String> i = S1.D1.forSale.listIterator();
+						while(i.hasNext()){
+							System.out.println("forSale: "+i.next());
+							S1.sell(1);
+						}
+					} else {
+						System.out.println("No contracts to sell.");	
+					}
 				}
 //				do nothing...conserve resources...drink beer
 			}
