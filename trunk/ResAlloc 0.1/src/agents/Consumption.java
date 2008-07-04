@@ -20,7 +20,7 @@ public class Consumption {
 	 * @throws SQLException 
 	 */
 	public Consumption(int sres,int ownership) throws SQLException{
-		resources = sres;
+		resources = sres; //Eventually this value will have to sit in a db table somewhere
 		owner = ownership;
 		dischargeDue();
 		modifyRes();
@@ -48,6 +48,5 @@ public class Consumption {
 			resources = resources+D1.retRes(i.next());
 		}
 		
-
 	}
 }

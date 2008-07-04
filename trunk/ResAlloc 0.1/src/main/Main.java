@@ -6,7 +6,7 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		int producerID		= 0;				//unique Producer ID number
-		int iterations		= 5;
+		int iterations		= 50;
 //		int price			= 100000;			//cost of the contract
 //		int time			= 12;				//duration of the contract
 //		boolean delivery	= false;			//status of delivery of resource
