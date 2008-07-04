@@ -24,6 +24,12 @@ public class DBFundTbl extends DBHandler{
 			super.closedbConnection();	
 			return;
 	}
+	/**
+	 * Returns the amount of funds belonging to a specified owner.
+	 * @param ownership The actor.
+	 * @return The funds belonging to the specified owner.
+	 * @throws SQLException
+	 */
 	public int retrieveAmountfromFundstbl(int ownership) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
