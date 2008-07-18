@@ -15,7 +15,7 @@ public class DBContractTbl extends DBHandler{
 	boolean saleStatus;
 	int ownership;
 	boolean delivery;
-	int duration;
+	long duration;
 	int resources;
 	int price;
 	long commencedate;
@@ -33,9 +33,10 @@ public class DBContractTbl extends DBHandler{
 		+ "commencedate)"
 		+ "VALUES(?,?,?,?,?,?,?,?)";
 	String retrieverowcontracttbl = "SELECT * from contractTbl WHERE contractID=?";
-	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=?";
-	String modifyStatus = "UPDATE contractTbl SET saleStatus=? WHERE contractID=?";
-	String modifyOwnership = "UPDATE contractTbl SET ownership=? WHERE contractID=?";
+	String drcontracttbl = "DELETE FROM contractTbl WHERE contractID=? AND delivery=0";
+	String modifyStatus = "UPDATE contractTbl SET saleStatus=? WHERE contractID=? AND delivery=0";
+	String modifyOwnership = "UPDATE contractTbl SET ownership=? WHERE contractID=? AND delivery=0";
+	String setDelivered = "UPDATE contractTbl SET delivery=1 WHERE contractID=? AND delivery=0";
 	/**
 	 * Puts a new contract record into the database. 
 	 * @param contractID Unique ID of the contract.
@@ -53,7 +54,7 @@ public class DBContractTbl extends DBHandler{
 			boolean saleStatus,
 			int ownership,
 			boolean delivery,
-			int duration,
+			long duration,
 			int resources,
 			int price,
 			long commencedate) throws SQLException{
@@ -63,7 +64,7 @@ public class DBContractTbl extends DBHandler{
 			ps.setBoolean(2,saleStatus);
 			ps.setInt(3,ownership);
 			ps.setBoolean(4,delivery);
-			ps.setInt(5,duration);
+			ps.setLong(5,duration);
 			ps.setInt(6,resources);
 			ps.setInt(7,price);
 			ps.setLong(8,commencedate);
@@ -80,12 +81,12 @@ public class DBContractTbl extends DBHandler{
 	public void retrieveRecordfromContracttbl(String contractID) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"'");
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE contractID='"+contractID+"' AND delivery=0");
 		while (rs.next()){
 			saleStatus = rs.getBoolean("saleStatus");
 			ownership = rs.getInt("ownership");
 			delivery = rs.getBoolean("delivery");
-			duration = rs.getInt("duration");
+			duration = rs.getLong("duration");
 			resources = rs.getInt("resources");
 			price = rs.getInt("price");
 			commencedate = rs.getLong("commencedate");
@@ -104,7 +105,7 @@ public class DBContractTbl extends DBHandler{
 	public String getContractID() {
 		return contractID;
 	}
-	public synchronized boolean isDBSaleStatus(String contractID) throws SQLException {
+	public boolean isDBSaleStatus(String contractID) throws SQLException {
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
 		ResultSet rs = s.executeQuery("SELECT saleStatus FROM contractTbl WHERE contractID='"+contractID+"'");
@@ -123,7 +124,7 @@ public class DBContractTbl extends DBHandler{
 	public boolean isDelivery() {
 		return delivery;
 	}
-	public int getDuration() {
+	public long getDuration() {
 		return duration;
 	}
 	public int getResources() {
@@ -160,7 +161,7 @@ public class DBContractTbl extends DBHandler{
 	public void setDelivery(boolean delivery) {
 		this.delivery = delivery;
 	}
-	public void setDuration(int duration) {
+	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 	public void setResources(int resources) {
@@ -182,7 +183,7 @@ public class DBContractTbl extends DBHandler{
 	public void retrieveForSalefromContracttbl(int fundsleft) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE saleStatus=true AND price <="+fundsleft);
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE saleStatus=true AND price <="+fundsleft+" AND delivery=0");
 		while (rs.next()){
 			forSale.add(rs.getString("contractID"));
 		}
@@ -198,10 +199,12 @@ public class DBContractTbl extends DBHandler{
 	public void retAllDisch(int ownership) throws SQLException{
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE ownership='"+ownership+"'");
+		Date d = new Date();
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE ownership='"+ownership+"' AND delivery=0");
 		while (rs.next()){
-			if (System.currentTimeMillis()-rs.getInt("duration")<=rs.getLong("commencedate")){
+			if (d.getTime()>(rs.getLong("duration")+rs.getLong("commencedate"))){
 				disch.add(rs.getString("contractID"));
+				System.out.println("Discharged Contract: "+rs.getString("contractID"));
 			}
 		}
 		super.closedbConnection();
@@ -234,10 +237,26 @@ public class DBContractTbl extends DBHandler{
 		int rcpa=0; //rcpa = resource contracts per agent
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE contractID='"+contractID+"'");
+		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE contractID='"+contractID+"' AND delivery=0");
 		while (rs.next()){
 			rcpa = rcpa+rs.getInt("resources");
 		}
 		return rcpa;
+	}
+	/**
+	 * Sets a contract's delivery status to true to denote that it has been discharged.  Unlike
+	 * setDelivery, this method directly modifies the delivery field in the contract record within the 
+	 * database.
+	 * @param owner
+	 * @throws SQLException
+	 */
+	public void setDelivered(String contractID) throws SQLException {
+		//needs to update the db
+		super.opendbConnection();
+		PreparedStatement ps = super.con.prepareStatement(setDelivered);
+		ps.setString(1, contractID);
+		ps.executeUpdate();
+		super.closedbConnection();
+		return;
 	}
 }

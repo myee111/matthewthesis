@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram scope="scopeElementSets.elementSet.Switchable Types In Package" style="standardDiagramStyles.diagramStyle.Standard Basic Style" version="1.5.3">
+        <switch switchID="scopeElementSets.stylePatternSwitch.Scope Package" switchValue="resallocDB"/>
+        <class className="resallocDB.DBFundTbl" project="ResAlloc 0.1" xLocation="0" yLocation="0"/>
+        <class className="resallocDB.DBContractTbl" project="ResAlloc 0.1" xLocation="20" yLocation="20"/>
+        <class className="resallocDB.DBHandler" project="ResAlloc 0.1" xLocation="40" yLocation="40"/>
+        <class className="resallocDB.DBOwnerRes" project="ResAlloc 0.1" xLocation="60" yLocation="60"/>
+    </diagram>
+</ajsv>

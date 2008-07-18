@@ -28,7 +28,7 @@ public class Producer extends Customer {
 	 * @param resources The associated resources to be delivered in the contract.
 	 * @throws Exception
 	 */
-	public void produceContract(int price, int time, boolean delivery,
+	public void produceContract(int price, long time, boolean delivery,
 			int resources) throws Exception {
 		
 		DBContractTbl db1 = new DBContractTbl();
