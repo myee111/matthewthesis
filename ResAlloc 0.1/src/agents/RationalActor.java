@@ -41,14 +41,14 @@ public class RationalActor extends Thread {
 		Seller S1 = new Seller(ID);
 		System.out.println("Resources for agent "+ID+" = "+resources);
 		try {
-			if (resources<9980){
-				B1.purchase(1);
+			if (resources<9980){//If resources are below slack, purchase 1 contract
+				B1.purchaseUpTo(9980-resources);
 			} else {
-				if (resources>9980){
+				if (resources>9980){//if resources are greater than slack...
 					System.out.println("contracts for sale: "+S1.D1.forSale.size());
-					if (S1.D1.forSale.size()>0) {
+					if (S1.D1.forSale.size()>0) {//and resource contracts are greater than zero
 						Iterator<String> i = S1.D1.forSale.listIterator();
-						while(i.hasNext()){
+						if(i.hasNext()){//sell 1 surplus contracts
 							System.out.println("forSale: "+i.next());
 							S1.sell(1);
 						}

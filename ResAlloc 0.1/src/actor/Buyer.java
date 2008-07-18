@@ -24,7 +24,7 @@ public class Buyer extends Customer{
 	 * @param contractID The unique string identifier of the contract.
 	 * @throws SQLException
 	 */
-	public synchronized void buyContract(String contractID) throws SQLException{  
+	public void buyContract(String contractID) throws SQLException{  
 		super.D1.retrieveRecordfromContracttbl(contractID);
 		super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
 		if (super.F1.getAmountTotal() >= super.D1.getPrice() && super.D1.isDBSaleStatus(contractID)){
@@ -55,6 +55,27 @@ public class Buyer extends Customer{
 		while(i.hasNext() && numbertobuy>0){
 			buyContract(i.next());
 			numbertobuy--;
+		}
+		return;
+	}
+	/**
+	 * Searches the database for contracts with saleStatus flag set to 'yes'.  The forSale list within 
+	 * this object contains a list of all the contract that are for sale.  The retrieveForSalefromContractTbl
+	 * method should return results that cost less than the total funds the customer has in his account.
+	 * This method will purchase as many contracts as it takes to reach the 'limit' parameter. 
+	 * @param numbertobuy
+	 * @throws SQLException
+	 */
+	public void purchaseUpTo(int limit) throws SQLException{
+		int a = super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
+		String contractID;
+		System.out.println("Funds: "+a);
+		super.D1.retrieveForSalefromContracttbl(a);
+		Iterator<String> i = super.D1.forSale.listIterator();
+		while(i.hasNext() && limit<0){
+			contractID = i.next();
+			buyContract(contractID);
+			limit = limit-super.D1.retRes(contractID);
 		}
 		return;
 	}
