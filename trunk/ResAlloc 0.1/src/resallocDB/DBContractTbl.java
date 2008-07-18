@@ -228,18 +228,19 @@ public class DBContractTbl extends DBHandler{
 	}
 	/**
 	 * Calculates a running total of all resources belonging to a specified owner.
-	 * Actually I don't think I need this method.
+	 * Actually I don't think I need this method.  Wait yes I do.  For testing.  
 	 * @param owner
 	 * @return 
 	 * @throws SQLException
 	 */
-	public int retTotalRes(String owner) throws SQLException{
+	public int retTotalRes(int owner) throws SQLException{
 		int rcpa=0; //rcpa = resource contracts per agent
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
-		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE contractID='"+contractID+"' AND delivery=0");
+		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE ownership='"+owner+"' AND delivery=0");
 		while (rs.next()){
 			rcpa = rcpa+rs.getInt("resources");
+			System.out.println("totalling resource contracts...");
 		}
 		return rcpa;
 	}
