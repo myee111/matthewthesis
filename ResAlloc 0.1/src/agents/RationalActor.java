@@ -29,6 +29,8 @@ public class RationalActor extends Thread {
 		surplus = 500;
 		Consumption C1 = new Consumption(ID);
 		resources = C1.resources;
+		C1.dischargeDue();
+		System.out.println("discharged contracts");
 	}
 	/**
 	 * When the thread is spawned, the agent purchases resources and resources are deducted from the 
@@ -39,10 +41,11 @@ public class RationalActor extends Thread {
 		Seller S1 = new Seller(ID);
 		System.out.println("Resources for agent "+ID+" = "+resources);
 		try {
-			if (resources<resources-slack){
+			if (resources<9980){
 				B1.purchase(1);
 			} else {
-				if (resources>surplus){
+				if (resources>9980){
+					System.out.println("contracts for sale: "+S1.D1.forSale.size());
 					if (S1.D1.forSale.size()>0) {
 						Iterator<String> i = S1.D1.forSale.listIterator();
 						while(i.hasNext()){

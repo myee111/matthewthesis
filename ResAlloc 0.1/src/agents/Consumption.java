@@ -25,11 +25,12 @@ public class Consumption {
 	public Consumption(int ownership) throws SQLException{
 		owner = ownership;
 		resources = OR.retrieveAmountfromORtbl(ownership);
-		dischargeDue();
-		modifyRes();
+//		dischargeDue();
+//		modifyRes(); //deducts resources 1
 	}
 	/**
-	 * This method modifies the amount of resources owned by the agent.
+	 * This method modifies the amount of resources owned by the agent.  In other words, this is the 
+	 * consumption function.
 	 * @throws SQLException 
 	 */
 	public void modifyRes() throws SQLException{
@@ -42,15 +43,19 @@ public class Consumption {
 	}
 	/**
 	 * Discharge contracts that are due.  Add those resources to the running resource count.
-	 * A contract is due to be discharged when the current_time-duration = commencedate.
+	 * A contract is due to be discharged when the current_time-duration = commencedate.  After 
+	 * adding the resource to the owner's resource pool, must set delivery flag to true.
 	 * @throws SQLException 
 	 */
 	public void dischargeDue() throws SQLException{
+		String contractID;
 		D1.retAllDisch(owner);
 		Iterator<String> i = D1.disch.listIterator();
 		while (i.hasNext()){
-			OR.addRes(owner, D1.retRes(i.next()));
+			contractID=i.next();
+			OR.addRes(owner, D1.retRes(contractID));
+			D1.setDelivered(contractID);
 		}
-		
+		return;
 	}
 }
