@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Iterator;
+
 import resallocDB.DBContractTbl;
 import agents.*;
 
@@ -14,16 +16,19 @@ public class Main {
 		/**
 		 * The agents execute in lockstep.
 		 */
-		for (int i = 0; i<1; i++){
-			Thread t1 = new RationalActor(1);
-			t1.start();
-			t1.join();
-			Thread t2 = new RationalActor(2);
-			t2.start();
-			t2.join();
-		}
+//		for (int i = 0; i<1; i++){
+//			Thread t1 = new RationalActor(1);
+//			t1.start();
+//			t1.join();
+//			Thread t2 = new RationalActor(2);
+//			t2.start();
+//			t2.join();
+//		}
 		DBContractTbl D1 = new DBContractTbl();
-		System.out.println("Agent 2's total resources are: "+D1.retTotalRes(2));
-
+		D1.retReadyDisch(2);
+		Iterator<String> i = D1.toDisch.listIterator();
+		while (i.hasNext()){
+			System.out.println(i.next());
+		}
 	}
 }

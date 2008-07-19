@@ -72,8 +72,9 @@ public class Buyer extends Customer{
 		System.out.println("Funds: "+a);
 		super.D1.retrieveForSalefromContracttbl(a);
 		Iterator<String> i = super.D1.forSale.listIterator();
-		while(i.hasNext() && limit<0){
+		while(i.hasNext() && limit>=0){
 			contractID = i.next();
+			System.out.println("contract ID for sale: "+contractID);
 			buyContract(contractID);
 			limit = limit-super.D1.retRes(contractID);
 		}

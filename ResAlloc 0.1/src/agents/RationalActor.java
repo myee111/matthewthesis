@@ -41,8 +41,9 @@ public class RationalActor extends Thread {
 		Seller S1 = new Seller(ID);
 		System.out.println("Resources for agent "+ID+" = "+resources);
 		try {
-			if (resources<9980){//If resources are below slack, purchase 1 contract
+			if (resources<9980){//If resources are below slack, purchase up to whatever is required to be within slack
 				B1.purchaseUpTo(9980-resources);
+				
 			} else {
 				if (resources>9980){//if resources are greater than slack...
 					System.out.println("contracts for sale: "+S1.D1.forSale.size());
