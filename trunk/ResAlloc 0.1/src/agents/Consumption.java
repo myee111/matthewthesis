@@ -58,4 +58,22 @@ public class Consumption {
 		}
 		return;
 	}
+	/**
+	 * Discharge contracts as needed to make up for deficit.  In other words, to discharge resource contracts to bring 
+	 * supply within slack. 
+	 * @param quantity The amount of total resources in order to bring supply within slack.
+	 * @throws SQLException
+	 */
+	public void dischargeNeed(int quantity) throws SQLException{
+		int resCount=0;
+		String contractID;
+		D1.retReadyDisch(owner);
+		D1.retTotalRes(owner);
+		Iterator<String> i = D1.toDisch.listIterator();
+		while (i.hasNext() && resCount<=quantity) {
+			contractID=i.next();
+			OR.addRes(owner, D1.retRes(contractID));
+			D1.setDelivered(contractID);
+		}
+	}
 }

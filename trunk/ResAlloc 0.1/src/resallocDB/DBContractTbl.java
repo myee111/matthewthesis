@@ -21,6 +21,7 @@ public class DBContractTbl extends DBHandler{
 	long commencedate;
 	public List<String> forSale = new LinkedList<String>();
 	public List<String> disch = new LinkedList<String>();
+	public List<String> toDisch = new LinkedList<String>();
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -230,7 +231,7 @@ public class DBContractTbl extends DBHandler{
 	 * Calculates a running total of all resources belonging to a specified owner.
 	 * Actually I don't think I need this method.  Wait yes I do.  For testing.  
 	 * @param owner
-	 * @return 
+	 * @return The total resources from the contracts owned by the owner.
 	 * @throws SQLException
 	 */
 	public int retTotalRes(int owner) throws SQLException{
@@ -240,7 +241,6 @@ public class DBContractTbl extends DBHandler{
 		ResultSet rs = s.executeQuery("SELECT resources FROM contractTbl WHERE ownership='"+owner+"' AND delivery=0");
 		while (rs.next()){
 			rcpa = rcpa+rs.getInt("resources");
-			System.out.println("totalling resource contracts...");
 		}
 		return rcpa;
 	}
@@ -257,6 +257,25 @@ public class DBContractTbl extends DBHandler{
 		PreparedStatement ps = super.con.prepareStatement(setDelivered);
 		ps.setString(1, contractID);
 		ps.executeUpdate();
+		super.closedbConnection();
+		return;
+	}
+	/**
+	 * Returns a list of all valid contracts owned by 'ownership'.  
+	 * @param ownership
+	 * @throws SQLException
+	 */
+	public void retReadyDisch(int ownership) throws SQLException{
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		Date d = new Date();
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE ownership='"+ownership+"' AND delivery=0");
+		while (rs.next()){
+			if (d.getTime()<(rs.getLong("duration")+rs.getLong("commencedate"))){
+				toDisch.add(rs.getString("contractID"));
+				System.out.println("Contract can be delivered: "+rs.getString("contractID"));
+			}
+		}
 		super.closedbConnection();
 		return;
 	}
