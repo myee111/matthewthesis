@@ -31,9 +31,7 @@ public class Buyer extends Customer{
 			super.F1.deductFunds(super.getCustomerNumber(), super.D1.getPrice());
 			super.F1.addFunds(super.D1.getOwnership(), super.D1.getPrice());    
 			super.D1.setOwnership(contractID, super.getCustomerNumber());
-			System.out.println("Contract "+contractID+" ownership set.");
 			super.D1.setSaleStatus(contractID, false);
-			System.out.println("Contract "+contractID+" bought.");
 		} else {
 			System.out.println("Not enough funds or contract not for sale.");
 		}
@@ -68,16 +66,17 @@ public class Buyer extends Customer{
 	 */
 	public void purchaseUpTo(int limit) throws SQLException{
 		int a = super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
+		int count=0;
 		String contractID;
-		System.out.println("Funds: "+a);
 		super.D1.retrieveForSalefromContracttbl(a);
 		Iterator<String> i = super.D1.forSale.listIterator();
 		while(i.hasNext() && limit>=0){
 			contractID = i.next();
-			System.out.println("contract ID for sale: "+contractID);
 			buyContract(contractID);
 			limit = limit-super.D1.retRes(contractID);
+			count++;
 		}
+		System.out.println(count+" contracts bought.");
 		return;
 	}
 }

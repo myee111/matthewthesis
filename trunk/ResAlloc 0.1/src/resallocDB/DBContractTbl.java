@@ -22,6 +22,7 @@ public class DBContractTbl extends DBHandler{
 	public List<String> forSale = new LinkedList<String>();
 	public List<String> disch = new LinkedList<String>();
 	public List<String> toDisch = new LinkedList<String>();
+	public List<String> toSell = new LinkedList<String>();
 	
 	String rowstatementcontracttbl = "INSERT INTO contractTbl("
 		+ "contractID,"
@@ -182,11 +183,13 @@ public class DBContractTbl extends DBHandler{
 	 * @throws SQLException
 	 */
 	public void retrieveForSalefromContracttbl(int fundsleft) throws SQLException{
+		int total=0;
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
 		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE saleStatus=true AND price <="+fundsleft+" AND delivery=0");
-		while (rs.next()){
+		while (rs.next() && total<fundsleft){
 			forSale.add(rs.getString("contractID"));
+			total=total+rs.getInt("price");
 		}
 		super.closedbConnection();
 		return;
@@ -273,7 +276,26 @@ public class DBContractTbl extends DBHandler{
 		while (rs.next()){
 			if (d.getTime()<(rs.getLong("duration")+rs.getLong("commencedate"))){
 				toDisch.add(rs.getString("contractID"));
-				System.out.println("Contract can be delivered: "+rs.getString("contractID"));
+			}
+		}
+		super.closedbConnection();
+		return;
+	}
+	/**
+	 * Pretty much the same method as retReadyDisch() except the SQL query includes the 
+	 * parameter for contracts that are not for sale. 
+	 * @param ownership
+	 * @throws SQLException
+	 */
+	public void retReadyToSell(int ownership) throws SQLException{
+		super.opendbConnection();
+		Statement s = super.con.createStatement();
+		Date d = new Date();
+		ResultSet rs = s.executeQuery("SELECT * from contractTbl WHERE ownership='"+ownership+"' AND delivery=0 AND saleStatus=0");
+		while (rs.next()){
+			if (d.getTime()<(rs.getLong("duration")+rs.getLong("commencedate"))){
+				toSell.add(rs.getString("contractID"));
+				System.out.println("Contract can be sold: "+rs.getString("contractID"));
 			}
 		}
 		super.closedbConnection();

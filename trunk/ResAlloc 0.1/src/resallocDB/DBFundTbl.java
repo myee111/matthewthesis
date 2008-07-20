@@ -91,13 +91,13 @@ public class DBFundTbl extends DBHandler{
 	/**
 	 * Works the same way as addFunds except this deducts funds.  
 	 * @param ownership
-	 * @param price
+	 * @param price The cost of the contract.  This is the amount to be deducted.
 	 * @throws SQLException
 	 */
 	public void deductFunds(int ownership, int price) throws SQLException {
 		int newamt=0;
 		retrieveAmountfromFundstbl(ownership);
-		if (getAmountTotal()>price){
+		if (getAmountTotal()>=price){
 			newamt = getAmountTotal()-price;
 			super.opendbConnection();
 			PreparedStatement ps = super.con.prepareStatement(modifyfund);
