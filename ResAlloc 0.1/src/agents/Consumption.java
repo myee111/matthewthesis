@@ -25,17 +25,23 @@ public class Consumption {
 	public Consumption(int ownership) throws SQLException{
 		owner = ownership;
 		resources = OR.retrieveAmountfromORtbl(ownership);
-//		dischargeDue();
-//		modifyRes(); //deducts resources 1
+	}
+	/**
+	 * Updates the resources counter.
+	 * @throws SQLException
+	 */
+	public void getORres() throws SQLException{
+		resources = OR.retrieveAmountfromORtbl(owner);
 	}
 	/**
 	 * This method modifies the amount of resources owned by the agent.  In other words, this is the 
 	 * consumption function.
+	 * @param amount The quantity that is deducted from the agent's resource supply.  
 	 * @throws SQLException 
 	 */
-	public void modifyRes() throws SQLException{
+	public void modifyRes(int amount) throws SQLException{
 		if (OR.getResTotal() > 0){
-			OR.deductRes(owner, 1);
+			OR.deductRes(owner, amount);
 		} else {
 			System.out.println("Out of resources and contracts!");
 		}
@@ -55,6 +61,7 @@ public class Consumption {
 			contractID=i.next();
 			OR.addRes(owner, D1.retRes(contractID));
 			D1.setDelivered(contractID);
+			System.out.println("Expired: "+contractID);
 		}
 		return;
 	}
@@ -74,6 +81,8 @@ public class Consumption {
 			contractID=i.next();
 			OR.addRes(owner, D1.retRes(contractID));
 			D1.setDelivered(contractID);
+			resCount = resCount+D1.retRes(contractID);
+			System.out.println("Contract "+contractID+" discharged from inventory as needed.");
 		}
 	}
 }
