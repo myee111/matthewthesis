@@ -1,6 +1,8 @@
 package main;
 
 import resallocDB.DBContractTbl;
+import resallocDB.DBFundTbl;
+import resallocDB.DBOwnerRes;
 import agents.*;
 
 public class Main {
@@ -27,9 +29,19 @@ public class Main {
 		}
 		
 		System.out.println("<-Simulation ended.->");
-		DBContractTbl D1 = new DBContractTbl();
+		
+		//Housekeeping.
+		
+		DBContractTbl 	D1 = new DBContractTbl();
+		DBFundTbl 		F1 = new DBFundTbl(); 
+		DBOwnerRes		O1 = new DBOwnerRes();
+		
 		System.out.println();
-		System.out.println("Agent 1 resources from contracts: "+D1.retTotalRes(1));
-		System.out.println("Agent 2 resources from contracts: "+D1.retTotalRes(2));
+		System.out.println("Agent,ContractResources,Resources,Funds ");
+		System.out.println("1,"+D1.retTotalRes(1)+","+O1.retrieveAmountfromORtbl(1)+","+F1.retrieveAmountfromFundstbl(1));
+		System.out.println("2,"+D1.retTotalRes(2)+","+O1.retrieveAmountfromORtbl(2)+","+F1.retrieveAmountfromFundstbl(2));
+	}
+	public void periodic(){
+		
 	}
 }

@@ -1,4 +1,4 @@
-package agents;
+package consumption;
 
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import resallocDB.DBOwnerRes;
  *
  */
 public class Consumption {
-	int resources;
+	private int resources;
 	int owner;
 	private DBContractTbl D1 = new DBContractTbl();
 	DBOwnerRes OR = new DBOwnerRes();
@@ -24,14 +24,14 @@ public class Consumption {
 	 */
 	public Consumption(int ownership) throws SQLException{
 		owner = ownership;
-		resources = OR.retrieveAmountfromORtbl(ownership);
+		setResources(OR.retrieveAmountfromORtbl(ownership));
 	}
 	/**
 	 * Updates the resources counter.
 	 * @throws SQLException
 	 */
 	public void getORres() throws SQLException{
-		resources = OR.retrieveAmountfromORtbl(owner);
+		setResources(OR.retrieveAmountfromORtbl(owner));
 	}
 	/**
 	 * This method modifies the amount of resources owned by the agent.  In other words, this is the 
@@ -84,5 +84,11 @@ public class Consumption {
 			resCount = resCount+D1.retRes(contractID);
 			System.out.println("Contract "+contractID+" discharged from inventory as needed.");
 		}
+	}
+	public void setResources(int resources) {
+		this.resources = resources;
+	}
+	public int getResources() {
+		return resources;
 	}
 }
