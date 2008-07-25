@@ -1,6 +1,8 @@
 package agents;
 
 import java.sql.SQLException;
+
+import consumption.Consumption;
 import actor.Seller;
 import actor.Buyer;
 
@@ -24,25 +26,25 @@ public class RationalActor extends Thread {
 	public RationalActor(int customerID) throws SQLException {
 		System.out.println("Agent: "+customerID);
 		ID = customerID;
-		slackLowerBound = 9980;
+		slackLowerBound = 10000;
 		surplusBound = 50;
-		eat=100;
+		eat=50;
 	
 		Consumption C1 = new Consumption(ID);
 		//deduct resources by 1.
-		C1.modifyRes(100);	
+		C1.modifyRes(eat);	
 		C1.getORres();
-		resources = C1.resources;
+		resources = C1.getResources();
 		System.out.println(eat+" resources consumed.");
 		//discharge expired contracts
 		C1.dischargeDue();
 		C1.getORres();
-		resources = C1.resources;
+		resources = C1.getResources();
 		//discharge enough contracts to bring agent's supply within slack. 
 		if (resources<slackLowerBound){
 			C1.dischargeNeed(slackLowerBound-resources);
 			C1.getORres();
-			resources = C1.resources;
+			resources = C1.getResources();
 		}	
 		
 	}
@@ -66,8 +68,7 @@ public class RationalActor extends Thread {
 					System.out.println("No contracts to sell.");	
 				}
 			}
-																			//do nothing...conserve resources...drink beer
-		
+			System.out.println("Nothing to do.");							//do nothing...conserve resources.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
