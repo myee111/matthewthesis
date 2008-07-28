@@ -23,12 +23,15 @@ public class RationalActor extends Thread {
 	 * @param customerID The ID of the buyer.
 	 * @throws SQLException 
 	 */
-	public RationalActor(int customerID) throws SQLException {
+	public RationalActor(int customerID, int consumption, int slack) throws SQLException {
 		System.out.println("Agent: "+customerID);
 		ID = customerID;
-		slackLowerBound = 10000;
+		slackLowerBound = 0;
 		surplusBound = 50;
-		eat=50;
+		eat=0;
+		
+		eat = consumption;
+		slackLowerBound = slack;
 	
 		Consumption C1 = new Consumption(ID);
 		//deduct resources by 1.
