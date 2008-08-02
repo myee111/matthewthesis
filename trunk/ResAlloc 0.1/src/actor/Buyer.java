@@ -13,6 +13,8 @@ public class Buyer extends Customer{
 	 * Passes customerID to superclass.
 	 * @param customerID
 	 */
+	int bought=0;
+	
 	public Buyer(int customerID) {
 		super(customerID);
 	}
@@ -74,9 +76,16 @@ public class Buyer extends Customer{
 			contractID = i.next();
 			buyContract(contractID);
 			limit = limit-super.D1.retRes(contractID);
+			System.out.println("Contract bought.");
 			count++;
 		}
-		System.out.println(count+" contracts bought.");
+		setBought(count);
 		return;
+	}
+	public int getBought() {
+		return bought;
+	}
+	public void setBought(int bought) {
+		this.bought = bought;
 	}
 }
