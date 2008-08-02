@@ -82,7 +82,7 @@ public class Consumption {
 			OR.addRes(owner, D1.retRes(contractID));
 			D1.setDelivered(contractID);
 			resCount = resCount+D1.retRes(contractID);
-			System.out.println("Contract "+contractID+" discharged from inventory as needed.");
+			System.out.println("Contract discharged from supply.");
 		}
 	}
 	public void setResources(int resources) {

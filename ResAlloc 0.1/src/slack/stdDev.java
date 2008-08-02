@@ -44,7 +44,8 @@ public class stdDev {
 	 * @return
 	 */
 	public static double avg(double oldavg, double value, double iteration){
-		return (oldavg+((value-oldavg)/iteration));
+//		return (oldavg+((value-oldavg)/iteration));
+		return ((oldavg+value)/2);
 	}
 	/**
 	 * The slack lowerbound is the running average minus the standard deviation.
