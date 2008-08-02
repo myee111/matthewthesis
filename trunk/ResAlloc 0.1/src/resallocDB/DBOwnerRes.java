@@ -57,7 +57,7 @@ public class DBOwnerRes extends DBHandler{
 	public void deductRes(int ownership, int res) throws SQLException {
 		int newamt=0;
 		retrieveAmountfromORtbl(ownership);
-		if (getResTotal()>res){
+		if (getResTotal()>=res){
 			newamt = getResTotal()-res;
 			super.opendbConnection();
 			PreparedStatement ps = super.con.prepareStatement(modifyres);

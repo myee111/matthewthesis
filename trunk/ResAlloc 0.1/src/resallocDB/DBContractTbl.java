@@ -228,6 +228,7 @@ public class DBContractTbl extends DBHandler{
 		while (rs.next()){
 			res = rs.getInt("resources");
 		}
+		super.closedbConnection();
 		return res;
 	}
 	/**
@@ -245,6 +246,7 @@ public class DBContractTbl extends DBHandler{
 		while (rs.next()){
 			rcpa = rcpa+rs.getInt("resources");
 		}
+		super.closedbConnection();
 		return rcpa;
 	}
 	/**
