@@ -53,7 +53,7 @@ public class Seller extends Customer{
 			OR.addRes(super.getCustomerNumber(), super.D1.retRes(contractID));
 			super.D1.setSaleStatus(contractID, true);
 			resCount = resCount+super.D1.retRes(contractID);
-			System.out.println("Contract: "+contractID+" is for sale.");
+			System.out.println("Contract is set for sale.");
 		}
 	}
 }

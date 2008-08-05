@@ -19,6 +19,7 @@ public class DBContractTbl extends DBHandler{
 	int resources;
 	int price;
 	long commencedate;
+	int inventory = 0;
 	public List<String> forSale = new LinkedList<String>();
 	public List<String> disch = new LinkedList<String>();
 	public List<String> toDisch = new LinkedList<String>();
@@ -208,7 +209,7 @@ public class DBContractTbl extends DBHandler{
 		while (rs.next()){
 			if (d.getTime()>(rs.getLong("duration")+rs.getLong("commencedate"))){
 				disch.add(rs.getString("contractID"));
-				System.out.println("Discharged Contract: "+rs.getString("contractID"));
+				System.out.println("Getting expired contracts.");
 			}
 		}
 		super.closedbConnection();
@@ -262,6 +263,7 @@ public class DBContractTbl extends DBHandler{
 		PreparedStatement ps = super.con.prepareStatement(setDelivered);
 		ps.setString(1, contractID);
 		ps.executeUpdate();
+		System.out.println("Setting contract delivered.");
 		super.closedbConnection();
 		return;
 	}
@@ -290,6 +292,7 @@ public class DBContractTbl extends DBHandler{
 	 * @throws SQLException
 	 */
 	public void retReadyToSell(int ownership) throws SQLException{
+		this.inventory = 0;
 		super.opendbConnection();
 		Statement s = super.con.createStatement();
 		Date d = new Date();
@@ -297,10 +300,14 @@ public class DBContractTbl extends DBHandler{
 		while (rs.next()){
 			if (d.getTime()<(rs.getLong("duration")+rs.getLong("commencedate"))){
 				toSell.add(rs.getString("contractID"));
-				System.out.println("Contract can be sold: "+rs.getString("contractID"));
+//				System.out.println("Contract can be sold: "+rs.getString("contractID"));
+				this.inventory++; 
 			}
 		}
 		super.closedbConnection();
 		return;
+	}
+	public int retInv(){
+		return this.inventory;
 	}
 }

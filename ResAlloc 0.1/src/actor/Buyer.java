@@ -49,7 +49,7 @@ public class Buyer extends Customer{
 	 */
 	public void purchase(int numbertobuy) throws SQLException{
 		int a = super.F1.retrieveAmountfromFundstbl(super.getCustomerNumber());
-		System.out.println("Funds: "+a);
+//		System.out.println("Funds: "+a);
 		super.D1.retrieveForSalefromContracttbl(a);
 		Iterator<String> i = super.D1.forSale.listIterator();
 		while(i.hasNext() && numbertobuy>0){

@@ -35,19 +35,19 @@ public class RationalActor extends Thread {
 	 * agent's pool. 
 	 * @throws SQLException 
 	 */
-	public void go(int ave, int slackL,int cons) throws SQLException{
+	public void go(int ave, int slackL) throws SQLException{
 		Buyer B1 = new Buyer(ID);
 		Seller S1 = new Seller(ID);
 		
 		slackLowerBound = slackL;
 		System.out.println("resources "+resources+" slack "+slackLowerBound);
 		
-		eat = cons;
+//		eat = cons;
 
 		Consumption C1 = new Consumption(ID);
 		
 		resources = C1.getResources();
-		System.out.println(eat+" resources consumed.");
+//		System.out.println(eat+" resources consumed.");
 		//discharge expired contracts
 		C1.dischargeDue();
 		C1.getORres();
