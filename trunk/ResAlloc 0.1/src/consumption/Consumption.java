@@ -57,11 +57,11 @@ public class Consumption {
 		String contractID;
 		D1.retAllDisch(owner);
 		Iterator<String> i = D1.disch.listIterator();
+		System.out.println("Discharging expired contracts.");
 		while (i.hasNext()){
 			contractID=i.next();
 			OR.addRes(owner, D1.retRes(contractID));
 			D1.setDelivered(contractID);
-			System.out.println("Expired: "+contractID);
 		}
 		return;
 	}

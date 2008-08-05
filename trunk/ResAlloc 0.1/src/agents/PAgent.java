@@ -24,7 +24,7 @@ public class PAgent extends Thread{
 		for(int i=0; i<iter; i++){
 			Producer P1 = new Producer(ID);
 			try {
-				P1.produceContract(100, 2000000, false, 100);
+				P1.produceContract(100, 100000, false, 100);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
