@@ -38,7 +38,7 @@ public class RationalActor extends Thread {
 	public void go(int ave, int slackL) throws SQLException{
 		Buyer B1 = new Buyer(ID);
 		Seller S1 = new Seller(ID);
-		
+		double coeff=0.5;
 		slackLowerBound = slackL;
 		System.out.println("resources "+resources+" slack "+slackLowerBound);
 		
@@ -61,10 +61,13 @@ public class RationalActor extends Thread {
 		
 		try {
 			if (resources<slackLowerBound){									//If resources are below slackLowerBound
-				B1.purchaseUpTo(slackLowerBound-resources); 				//purchase up to whatever is required to be within slackLowerBound
+				B1.purchaseUpTo((int)(coeff*(slackLowerBound-resources))); 				//purchase up to whatever is required to be within slackLowerBound
+				System.out.println("Contracts to be bought: "+coeff*(slackLowerBound-resources));
+				//insert a purchase charge here
 			} else {
-				if (resources>(2*(ave-slackLowerBound))){				//if resources are greater than slackLowerBound plus the upperbound
-					S1.sellNeed(resources-(2*(ave-slackLowerBound)));	//sell all the contracts you need to get within slackLowerBound
+				if (resources>(ave+(2*(ave-slackLowerBound)))){				//if resources are greater than slackLowerBound plus the upperbound
+					S1.sellNeed(resources-(ave+(2*(ave-slackLowerBound))));	//sell all the contracts you need to get within slackLowerBound
+					//insert a selling charge here
 				} else {
 					System.out.println("No contracts to sell.");	
 				}
