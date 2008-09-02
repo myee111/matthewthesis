@@ -31,8 +31,8 @@ public class Main {
 		RationalActor t1 = new RationalActor(1);
 		RationalActor t2 = new RationalActor(2);
 //		int n=500;
-		Random generator1 = new Random(500);
-		Random generator2 = new Random(550);
+		Random generator1 = new Random(50);
+		Random generator2 = new Random();
 		int cons1 = 0;
 		int cons2 = 0;
 		int slack1 = 0;
@@ -45,7 +45,7 @@ public class Main {
 			Consumption C0 = new Consumption(0);
 			C0.dischargeDue();
 			System.out.println("<-1->");
-			cons1 = (int)(100+(500*generator1.nextGaussian()));
+			cons1 = (int)(50+(250*generator1.nextGaussian()));
 //			average1 = ((int)stdDev.avg(average1, average1-cons1, i+1)); 
 //			slack1 = (average1-((int)stdDev.sdKnuth(average1, average1-cons1)));
 			t1.go(5000, 4000);						//want to keep close to average value.
@@ -62,23 +62,23 @@ public class Main {
 			if (C1.getResources()>0){
 				C1.modifyRes(cons1);
 			}
-			System.out.println("<-2->");
-			cons2 = (int)(100+(500*generator2.nextGaussian()));
-//			average2 = ((int)stdDev.avg(average2, cons2, i+1));
-//			slack2 = (average2-((int)stdDev.sdKnuth(average2, cons2)));
-			t2.go(5000, 4000);
-			p.println(i+",2,"+D1.retTotalRes(2)+
-					","+(O1.retrieveAmountfromORtbl(2)+D1.retTotalRes(2))+
-					","+F1.retrieveAmountfromFundstbl(2)+
-					","+t2.getBought()+
-					","+slack2+
-					","+average2+
-					","+cons2*(-1));
-			Consumption C2 = new Consumption(2);
-			C2.getORres();
-			if (C2.getResources()>0){
-				C2.modifyRes(cons2);
-			}
+//			System.out.println("<-2->");
+//			cons2 = (int)(40+(250*generator2.nextGaussian()));
+////			average2 = ((int)stdDev.avg(average2, cons2, i+1));
+////			slack2 = (average2-((int)stdDev.sdKnuth(average2, cons2)));
+//			t2.go(5000, 4000);
+//			p.println(i+",2,"+D1.retTotalRes(2)+
+//					","+(O1.retrieveAmountfromORtbl(2)+D1.retTotalRes(2))+
+//					","+F1.retrieveAmountfromFundstbl(2)+
+//					","+t2.getBought()+
+//					","+slack2+
+//					","+average2+
+//					","+cons2*(-1));
+//			Consumption C2 = new Consumption(2);
+//			C2.getORres();
+//			if (C2.getResources()>0){
+//				C2.modifyRes(cons2);
+//			}
 		}
 		System.out.println("<-Simulation ended.->");
 	}
